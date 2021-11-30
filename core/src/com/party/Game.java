@@ -2,24 +2,44 @@ package com.party;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import lombok.Getter;
 
+@Getter
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     Texture img;
     TiledMap tileMap;
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
+    Sprite playerSprite;
+    static Game game;
+
     @Override
     public void create() {
+        game = this;
         tileMap = new TmxMapLoader().load("TestTom.tmx");
+
+        for (MapLayer layer : tileMap.getLayers()) {
+            System.out.println(layer.getName() + ": " + layer.getObjects().getCount() );
+            layer.setVisible(true);
+        }
+
+      //  System.out.println(Gdx.files.internal("nismo.png").file().getAbsolutePath());
+
+       Texture texture = new Texture(Gdx.files.internal("nismo.png"));
+        playerSprite = new Sprite(texture);
+
 
         float w = 1600;
         float h = 960;
@@ -47,6 +67,15 @@ public class Game extends ApplicationAdapter {
         renderer.setView(camera);
         renderer.render();
 
+        batch.begin();
+        playerSprite.draw(batch);
+        batch.end();
+
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+            playerSprite.setPosition(Gdx.input.getX() - playerSprite.getWidth()/2,
+                    Gdx.graphics.getHeight() - Gdx.input.getY() - playerSprite.getHeight()/2);
+        }
+
        // renderer.getSpriteBatch().begin();
       //  player.draw(renderer.getSpriteBatch());
        // renderer.getSpriteBatch().end();
@@ -56,5 +85,20 @@ public class Game extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         img.dispose();
+
     }
+
+    @Override
+    public void resize(int width, int height) {
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    public static Game i() {return game;}
 }
