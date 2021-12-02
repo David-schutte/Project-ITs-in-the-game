@@ -8,14 +8,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
-import lombok.Getter;
+import com.badlogic.gdx.math.Vector2;
+import com.party.entity.Entity;
+import com.party.entity.Player;
+import com.party.test.TestCycle;
 
-@Getter
+import java.util.HashSet;
+
+
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     Texture img;
@@ -24,26 +28,19 @@ public class Game extends ApplicationAdapter {
     OrthographicCamera camera;
     Sprite playerSprite;
     static Game game;
+    private Player player;
+    public HashSet<Entity> entities = new HashSet<>();
 
     @Override
     public void create() {
         game = this;
-        tileMap = new TmxMapLoader().load("TestTom.tmx");
+        player = new Player();
+        tileMap = new TmxMapLoader().load("TestTomMetOBJ.tmx");
 
-        for (MapLayer layer : tileMap.getLayers()) {
-            System.out.println(layer.getName() + ": " + layer.getObjects().getCount() );
-            layer.setVisible(true);
-        }
-
-      //  System.out.println(Gdx.files.internal("nismo.png").file().getAbsolutePath());
-
-       Texture texture = new Texture(Gdx.files.internal("nismo.png"));
-        playerSprite = new Sprite(texture);
-
+        entities.add(player);
 
         float w = 1600;
         float h = 960;
-        System.out.println(w + ": " + h);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -51,34 +48,41 @@ public class Game extends ApplicationAdapter {
 
 
         batch = new SpriteBatch();
-       // img = new Texture("badlogic.jpg");
         renderer = new OrthogonalTiledMapRenderer(tileMap);
         renderer.render();
+
+        new TestCycle().go();
 
     }
 
     @Override
     public void render() {
-        Gdx.graphics.getGL20().glClearColor( 1, 1, 1, 1 );
+        Gdx.graphics.getGL20().glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Gdx.graphics.getGL20().glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         camera.update();
         renderer.setView(camera);
         renderer.render();
 
         batch.begin();
-        playerSprite.draw(batch);
-        batch.end();
 
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            playerSprite.setPosition(Gdx.input.getX() - playerSprite.getWidth()/2,
-                    Gdx.graphics.getHeight() - Gdx.input.getY() - playerSprite.getHeight()/2);
+        for (Entity entity : entities) {
+            entity.render(batch);
         }
 
-       // renderer.getSpriteBatch().begin();
-      //  player.draw(renderer.getSpriteBatch());
-       // renderer.getSpriteBatch().end();
+      // if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+
+      //     TiledMapTile b =tileMap.getTileSets().getTile(30);
+
+      //     player.setX(Gdx.input.getX());
+      //     player.setY(Gdx.input.getY());
+      //     (new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+      //     System.out.println(player.getX() + " l " + Gdx.input.getX());
+
+      //     player.draw(batch, 255f);
+      // }
+        batch.end();
     }
 
     @Override
@@ -100,5 +104,11 @@ public class Game extends ApplicationAdapter {
     public void resume() {
     }
 
-    public static Game i() {return game;}
+    public static Game i() {
+        return game;
+    }
+
+    public Sprite getPlayerSprite() {
+        return playerSprite;
+    }
 }
