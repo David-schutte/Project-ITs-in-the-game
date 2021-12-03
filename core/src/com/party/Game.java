@@ -35,7 +35,7 @@ public class Game extends ApplicationAdapter {
     public void create() {
         game = this;
         player = new Player();
-        tileMap = new TmxMapLoader().load("TestTomMetOBJ.tmx");
+        tileMap = new TmxMapLoader().load("gameboardv0.tmx");
 
         entities.add(player);
 
