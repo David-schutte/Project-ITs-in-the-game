@@ -2,17 +2,17 @@ package com.party;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.party.entity.Entity;
 import com.party.entity.Player;
 import com.party.test.TestCycle;
@@ -35,8 +35,9 @@ public class Game extends ApplicationAdapter {
     public void create() {
         game = this;
         player = new Player();
-        tileMap = new TmxMapLoader().load("gameboardv0.tmx");
 
+        //Loading the basic board to tileMap
+        tileMap = new TmxMapLoader().load("gameboardv0.tmx");
         entities.add(player);
 
         float w = 1600;
@@ -66,7 +67,6 @@ public class Game extends ApplicationAdapter {
         renderer.render();
 
         batch.begin();
-
         for (Entity entity : entities) {
             entity.render(batch);
         }
@@ -89,7 +89,6 @@ public class Game extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         img.dispose();
-
     }
 
     @Override
