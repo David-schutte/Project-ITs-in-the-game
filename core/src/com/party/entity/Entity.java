@@ -18,10 +18,16 @@ public class Entity extends Actor {
         batch.draw(texture, x, y);
     }
 
+    public void setX(float x) {
+        this.x = x;
+    }
 
+    public void setY(float y) {
+        this.y = y;
+    }
 
-    public void setX(float x){this.x = x;}
-    public void setY(float y){this.y = y;}
-    public void setTexture(Texture texture){this.texture = texture;}
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
 
 }

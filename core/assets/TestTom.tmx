@@ -2,6 +2,7 @@
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="14">
  <tileset firstgid="1" source="Tilesets/Meubelsx32.tsx"/>
  <tileset firstgid="17025" source="Tilesets/Roomsx32.tsx"/>
+ <tileset firstgid="25309" source="Tiled/Tilesets/Roomsx32.tsx"/>
  <layer id="1" name="Exterior" width="50" height="30">
   <data encoding="csv">
 21723,21869,21869,21869,21869,21869,21869,21869,21869,21869,21869,21869,21869,21718,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21876,21877,21877,21876,21876,21876,21876,21876,21876,21877,21877,21726,
