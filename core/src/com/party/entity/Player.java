@@ -13,7 +13,7 @@ public class Player extends Entity {
     private float speed = 2f;
     private float x;
     private float y;
-    Texture playerTexture = new Texture(Gdx.files.internal("nismo.png"));
+    Texture playerTexture = new Texture(Gdx.files.internal("first_player.png"));
 
     public Player(){
         setTexture(playerTexture);

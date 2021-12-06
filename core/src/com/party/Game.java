@@ -22,7 +22,6 @@ import java.util.HashSet;
 
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
-    Texture img;
     TiledMap tileMap;
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
@@ -35,7 +34,7 @@ public class Game extends ApplicationAdapter {
     public void create() {
         game = this;
         player = new Player();
-        tileMap = new TmxMapLoader().load("TestTomMetOBJ.tmx");
+        tileMap = new TmxMapLoader().load("gameboardv0.tmx");
 
         entities.add(player);
 
@@ -88,7 +87,6 @@ public class Game extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
-        img.dispose();
 
     }
 
