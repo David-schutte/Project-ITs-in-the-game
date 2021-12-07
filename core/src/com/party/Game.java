@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -23,9 +25,14 @@ import java.util.HashSet;
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     TiledMap tileMap;
+    TiledMapTileSet dice;
+    TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
     Sprite playerSprite;
+//    TiledMapTileLayer.Cell half1;
+//    TiledMapTileLayer layer2;
+
     static Game game;
     private Player player;
     public HashSet<Entity> entities = new HashSet<>();
@@ -34,10 +41,15 @@ public class Game extends ApplicationAdapter {
     public void create() {
         game = this;
         player = new Player();
-        tileMap = new TmxMapLoader().load("gameboardv0.tmx");
+        tileMap = new TmxMapLoader().load("gameboardv1.tmx");
 
         entities.add(player);
-
+//        System.out.println(tileMap.getTileSets().toString());
+//        dice = tileMap.getTileSets().getTileSet(0);
+//        dice1 = dice.getTile(485);
+//        half1.setTile(dice1);
+//        layer2.setCell(5,5, half1);
+//        System.out.println(dice1);
         float w = 1600;
         float h = 960;
 
