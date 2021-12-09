@@ -25,7 +25,8 @@ import java.util.HashSet;
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     TiledMap tileMap;
-    TiledMapTileSet dice;
+    TiledMap dice;
+    TiledMapTileSet dicetiles;
     TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
@@ -45,11 +46,13 @@ public class Game extends ApplicationAdapter {
 
         game = this;
         player = new Player();
-        tileMap = new TmxMapLoader().load("gameboardv1.tmx");
-
+        tileMap = new TmxMapLoader().load("gameboardv2.tmx");
+        dice = new TmxMapLoader().load("dice.tmx");
+        System.out.println(dice.getLayers().get(0).getObjects());
+        tileMap.getTileSets().getTileSet(0).putTile(20, dice.getTileSets().getTile(0));
         entities.add(player);
 //        System.out.println(tileMap.getTileSets().toString());
-//        dice = tileMap.getTileSets().getTileSet(0);
+//        dicetileset = tileMap.getTileSets().getTileSet(0);
 //        dice1 = dice.getTile(485);
 //        half1.setTile(dice1);
 //        layer2.setCell(5,5, half1);

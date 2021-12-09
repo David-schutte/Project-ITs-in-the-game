@@ -38,7 +38,6 @@ public class Player extends Entity {
 
     @Override
     public void draw(Batch batch, float parentAlpha){
-        System.out.println("moved.");
         batch.draw(Game.i().getPlayerSprite(), getPosX(), getPosY());
     }
 
