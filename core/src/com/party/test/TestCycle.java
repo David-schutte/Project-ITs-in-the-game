@@ -25,19 +25,16 @@ public class TestCycle {
             entity.setEndY(500);
 
 
-            for (int i = 0; i < 20; i++) {
+            Timer timer = new Timer();
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    entity.setEndX((int) locations.get(1).x);
+                    entity.setEndY((int) locations.get(1).y);
+                }
+            };
+            timer.schedule(timerTask, 10000L);
 
-                Timer timer = new Timer();
-                final int finalI = i;
-                TimerTask timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        entity.setEndX((int) locations.get(finalI).x);
-                        entity.setEndY((int) locations.get(finalI).y);
-                    }
-                };
-                timer.schedule(timerTask,i * 500);
-            }
-         }
+        }
     }
 }

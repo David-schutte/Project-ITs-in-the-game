@@ -64,8 +64,6 @@ public class Entity extends Actor {
     }
 
     public void move() {
-
-        System.out.println(" MOVED>! ");
         if (x > endX) x -= speed;
         if (x < endX) x += speed;
         if (y > endY) y -= speed;
