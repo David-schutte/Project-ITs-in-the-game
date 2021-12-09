@@ -3,6 +3,8 @@ package com.party.test;
 import com.badlogic.gdx.math.Vector2;
 import com.party.Game;
 import com.party.entity.Entity;
+import com.party.minigame.Minigame;
+import com.party.minigame.impl.SpamMinigame;
 
 import java.util.*;
 
@@ -34,7 +36,33 @@ public class TestCycle {
                 }
             };
             timer.schedule(timerTask, 10000L);
-
         }
+        Timer timer = new Timer();
+        TimerTask timerTask2 = new TimerTask() {
+            @Override
+            public void run() {
+                Minigame minigame = new SpamMinigame();
+                minigame.setPlayers(Game.i().getPlayerManager().getPlayers());
+                Game.i().setMinigame(minigame);
+                System.out.println("MINIGAME INIT");
+            }
+        };
+        timer.schedule(timerTask2, 10000L);
+        TimerTask timerTask3 = new TimerTask() {
+            @Override
+            public void run() {
+                Minigame minigame = Game.i().getCurrentMinigame();
+                if (minigame == null) {
+                    System.out.println("no minigame...");
+                    return;
+                }
+                ;
+
+                minigame.stop();
+                System.out.println("Winner of the minigame: " + minigame.getWinner() + " with score: " + minigame.getWinner().getPoints());
+                Game.i().setMinigame(null);
+            }
+        };
+        timer.schedule(timerTask3, 17000L);
     }
 }

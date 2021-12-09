@@ -11,6 +11,9 @@ import com.party.Game;
 public class Player extends Entity {
 
     private boolean focussed;
+    public int points;
+
+
 
     private float speed = 2f;
 
@@ -52,5 +55,11 @@ public class Player extends Entity {
     public void setFocussed(boolean focussed) {
         this.focussed = focussed;
     }
+    public int getPoints() {
+        return points;
+    }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }

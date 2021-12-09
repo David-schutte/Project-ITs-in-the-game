@@ -1,11 +1,12 @@
 package com.party.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class PlayerManager {
-    HashSet<Player> players = new HashSet<>();
+    ArrayList<Player> players = new ArrayList<>();
 
-    public HashSet<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 

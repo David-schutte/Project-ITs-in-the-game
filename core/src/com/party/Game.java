@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.party.entity.Entity;
 import com.party.entity.Player;
 import com.party.entity.PlayerManager;
+import com.party.minigame.Minigame;
 import com.party.test.TestCycle;
 
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     TiledMap tileMap;
     TiledMapTileSet dice;
+    Minigame currentMinigame;
     TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
     PlayerManager playerManager = new PlayerManager();
@@ -41,7 +43,7 @@ public class Game extends ApplicationAdapter {
         System.out.println("\uD83D\uDC4B");
 
         game = this;
-        player =  playerManager.createPlayer();
+        player = playerManager.createPlayer();
         player.setFocussed(true);
 
         Player playertest = playerManager.createPlayer();
@@ -62,7 +64,7 @@ public class Game extends ApplicationAdapter {
         camera.setToOrtho(false, w, h);
 
 
-        camera.setToOrtho(false, 1600 , 960);
+        camera.setToOrtho(false, 1600, 960);
         //follow player with camera
         camera.position.set(player.getX(), player.getY(), 0);
 
@@ -76,6 +78,7 @@ public class Game extends ApplicationAdapter {
         new TestCycle().go();
 
     }
+
 
     @Override
     public void render() {
@@ -94,11 +97,13 @@ public class Game extends ApplicationAdapter {
 
         batch.begin();
 
+        if (currentMinigame != null) {
+            currentMinigame.onKeyPress();
+        }
         for (Entity entity : entities) {
             entity.render(batch);
             entity.onTick();
         }
-
         // if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 
         //     TiledMapTile b =tileMap.getTileSets().getTile(30);
@@ -139,5 +144,15 @@ public class Game extends ApplicationAdapter {
         return playerSprite;
     }
 
+    public Minigame getCurrentMinigame() {
+        return currentMinigame;
+    }
+
+    public void setMinigame(Minigame minigame) {
+        this.currentMinigame = minigame;
+    }
     //draw a swastika
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
 }
