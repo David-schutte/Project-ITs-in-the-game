@@ -9,15 +9,21 @@ import java.util.*;
 public class TestCycle {
     ArrayList<Vector2> locs = new ArrayList<>();
     Map<Integer, Vector2> locations = new HashMap<>();
-    public TestCycle(){
+
+    public TestCycle() {
 
         for (int i = 0; i < 20; i++) {
             locations.put(i, new Vector2(20 + (i * 25), 50));
         }
     }
-    public void go(){
+
+    public void go() {
+
 
         for (final Entity entity : Game.i().entities) {
+            entity.setEndX(500);
+            entity.setEndY(500);
+
 
             for (int i = 0; i < 20; i++) {
 
@@ -26,12 +32,12 @@ public class TestCycle {
                 TimerTask timerTask = new TimerTask() {
                     @Override
                     public void run() {
-                        entity.setX(locations.get(finalI).x);
-                        entity.setY(locations.get(finalI).y);
+                        entity.setEndX((int) locations.get(finalI).x);
+                        entity.setEndY((int) locations.get(finalI).y);
                     }
                 };
                 timer.schedule(timerTask,i * 500);
             }
-        }
+         }
     }
 }

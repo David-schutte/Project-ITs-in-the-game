@@ -37,8 +37,12 @@ public class Game extends ApplicationAdapter {
     private Player player;
     public HashSet<Entity> entities = new HashSet<>();
 
+
+
     @Override
     public void create() {
+        System.out.println("\uD83D\uDC4B");
+
         game = this;
         player = new Player();
         tileMap = new TmxMapLoader().load("gameboardv1.tmx");
@@ -80,6 +84,7 @@ public class Game extends ApplicationAdapter {
 
         for (Entity entity : entities) {
             entity.render(batch);
+            entity.onTick();
         }
 
       // if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
@@ -121,4 +126,6 @@ public class Game extends ApplicationAdapter {
     public Sprite getPlayerSprite() {
         return playerSprite;
     }
+
+    //draw a swastika
 }
