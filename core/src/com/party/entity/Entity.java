@@ -9,20 +9,48 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Entity extends Actor {
-    private float x;
-    private float y;
+    private int x;
+    private int y;
+
+    private int endX;
+    private int endY;
+    private double speed = 1;
     private Texture texture;
 
-    public void render(Batch batch){
+
+    public Entity() {
+
+    }
+
+    public void render(Batch batch) {
 
         batch.draw(texture, x, y);
     }
 
-    public void setX(float x) {
+    public void setPosX(int x) {
         this.x = x;
     }
 
-    public void setY(float y) {
+    public int getPosX() {
+        return this.x;
+    }
+
+    public int getPosY() {
+        return this.y;
+    }
+
+    public int getEndX() {
+        return this.endX;
+    }
+
+    public int getEndY() {
+        return this.endY;
+    }
+
+    public void setEndX(int x){this.endX = x;}
+    public void setEndY(int y){this.endY = y;}
+
+    public void setPosY(int y) {
         this.y = y;
     }
 
@@ -30,4 +58,24 @@ public class Entity extends Actor {
         this.texture = texture;
     }
 
+    public void moveTo(int targetX, int targetY) {
+        this.endX = targetX;
+        this.endY = targetY;
+    }
+
+    public void move() {
+
+        System.out.println(" MOVED>! ");
+        if (x > endX) x -= speed;
+        if (x < endX) x += speed;
+        if (y > endY) y -= speed;
+        if (y < endY) y += speed;
+
+    }
+
+    public void onTick() {
+        if (x != endX || y != endY) {
+            move();
+        }
+    }
 }
