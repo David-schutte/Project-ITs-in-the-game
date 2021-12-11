@@ -6,10 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.party.entity.Entity;
 import com.party.entity.Player;
@@ -23,9 +20,8 @@ import java.util.HashSet;
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     TiledMap tileMap;
-    TiledMapTileSet dice;
+    TiledMap dice;
     Minigame currentMinigame;
-    TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
     PlayerManager playerManager = new PlayerManager();
     OrthographicCamera camera;
@@ -48,7 +44,9 @@ public class Game extends ApplicationAdapter {
 
         Player playertest = playerManager.createPlayer();
         tileMap = new TmxMapLoader().load("gameboardv2.tmx");
-
+        dice = new TmxMapLoader().load("dice.tmx");
+        System.out.println(dice.getTileSets().getTile(1));
+        tileMap.getTileSets().getTileSet(1).putTile(3, dice.getTileSets().getTile(1));
         entities.add(player);
         entities.add(playertest);
 //        System.out.println(tileMap.getTileSets().toString());
