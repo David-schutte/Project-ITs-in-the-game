@@ -22,7 +22,6 @@ public class Game extends ApplicationAdapter {
     TiledMap tileMap;
     TiledMap dice;
     Minigame currentMinigame;
-    TiledMap dice;
     TiledMapTileSet dicetiles;
     TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
