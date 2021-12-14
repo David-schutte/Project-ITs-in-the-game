@@ -45,7 +45,7 @@ public class Game extends ApplicationAdapter {
 
         game = this;
         player = new Player();
-        tileMap = new TmxMapLoader().load("gameboardv1.tmx");
+        tileMap = new TmxMapLoader().load("gameboardv2.tmx");
 
         entities.add(player);
 //        System.out.println(tileMap.getTileSets().toString());
