@@ -1,7 +1,6 @@
 package com.party.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class PlayerManager {
     ArrayList<Player> players = new ArrayList<>();

@@ -5,7 +5,11 @@ import com.party.Game;
 import com.party.board.Tile;
 import com.party.entity.Entity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TestCycle {
     ArrayList<Vector2> locs = new ArrayList<>();
