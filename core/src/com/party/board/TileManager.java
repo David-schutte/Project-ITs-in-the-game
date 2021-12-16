@@ -20,6 +20,10 @@ public class TileManager {
         this.tileMap.put(tileMap.size(), tile);
     }
 
+
+    private void addTile(int index, Tile tile){
+        this.tileMap.put(index, tile);
+    }
     public Map<Integer, Tile> getTileMap() {
         return tileMap;
     }

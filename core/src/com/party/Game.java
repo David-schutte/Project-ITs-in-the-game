@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.party.board.TileManager;
 import com.party.entity.Entity;
 import com.party.entity.Player;
@@ -83,6 +84,8 @@ public class Game extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
 
+      //  Viewport cameraViewport = new Viewport(camera.(), camera.getHeight);
+
 
         camera.setToOrtho(false, 1600, 960);
         //follow player with camera
@@ -117,7 +120,9 @@ public class Game extends ApplicationAdapter {
         renderer.setView(camera);
         renderer.render();
 
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
+
 
         if (currentMinigame != null) {
             currentMinigame.onKeyPress();
