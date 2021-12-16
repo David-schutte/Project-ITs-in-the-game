@@ -12,7 +12,7 @@ public class TileManager {
         addTile(new Tile(30,30));
         addTile(new Tile(40,30));
         addTile(new Tile(50,30));
-        addTile(new Tile(60,30).);
+        addTile(new Tile(60,30));
     }
 
     private void addTile(Tile tile){

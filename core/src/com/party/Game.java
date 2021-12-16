@@ -22,14 +22,10 @@ public class Game extends ApplicationAdapter {
     TiledMap tileMap;
     TiledMap dice;
     Minigame currentMinigame;
-    TiledMapTileSet dicetiles;
-    TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
     PlayerManager playerManager = new PlayerManager();
     OrthographicCamera camera;
     Sprite playerSprite;
-//    TiledMapTileLayer.Cell half1;
-//    TiledMapTileLayer layer2;
 
     static Game game;
     private Player player;
