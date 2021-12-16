@@ -45,10 +45,6 @@ public class Game extends ApplicationAdapter {
         entities.add(player);
         diceRoll();
 
-//        for (int i = 0; i<tileMap.getLayers().size(); i++){
-//            System.out.println(i + "" + tileMap.getLayers().get(i).getName());
-//        }
-
         entities.add(playertest);
         float w = 1600;
         float h = 960;
