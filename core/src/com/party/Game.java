@@ -43,16 +43,11 @@ public class Game extends ApplicationAdapter {
         Player playertest = playerManager.createPlayer();
         tileMap = new TmxMapLoader().load("gameboardv2.tmx");
         dice = new TmxMapLoader().load("dice.tmx");
-        System.out.println(dice.getTileSets().getTile(1));
         tileMap.getTileSets().getTileSet(1).putTile(3, dice.getTileSets().getTile(1));
         entities.add(player);
+        diceRoll();
+
         entities.add(playertest);
-//        System.out.println(tileMap.getTileSets().toString());
-//        dicetileset = tileMap.getTileSets().getTileSet(0);
-//        dice1 = dice.getTile(485);
-//        half1.setTile(dice1);
-//        layer2.setCell(5,5, half1);
-//        System.out.println(dice1);
         float w = 1600;
         float h = 960;
 
@@ -150,5 +145,21 @@ public class Game extends ApplicationAdapter {
     //draw a swastika
     public PlayerManager getPlayerManager() {
         return playerManager;
+    }
+
+    public void diceRoll() {
+        int max = 6;
+        int min = 1;
+        int range = max - min + 1;
+        int roll = (int)(Math.random() * range) + min;
+        for (int i = 1; i<7; i++) {
+            if (i==roll) {
+                tileMap.getLayers().get(i+1).setVisible(true);
+            }
+            else {
+                tileMap.getLayers().get(i+1).setVisible(false);
+            }
+        }
+        System.out.println(roll);
     }
 }
