@@ -6,8 +6,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.*;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.party.board.TileManager;
 import com.party.entity.Entity;
 import com.party.entity.Player;
 import com.party.entity.PlayerManager;
@@ -15,6 +22,7 @@ import com.party.minigame.Minigame;
 import com.party.test.TestCycle;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 
 public class Game extends ApplicationAdapter {
@@ -23,6 +31,7 @@ public class Game extends ApplicationAdapter {
     TiledMap dice;
     Minigame currentMinigame;
     TiledMapTileSet dicetiles;
+    TileManager tileManager;
     TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
     PlayerManager playerManager = new PlayerManager();
@@ -41,11 +50,22 @@ public class Game extends ApplicationAdapter {
         System.out.println("\uD83D\uDC4B");
 
         game = this;
+        tileManager = new TileManager();
+        tileManager.load();
         player = playerManager.createPlayer();
         player.setFocussed(true);
 
         Player playertest = playerManager.createPlayer();
-        tileMap = new TmxMapLoader().load("gameboardv2.tmx");
+        tileMap = new TmxMapLoader().load("gameboard.tmx");
+        MapLayer b = tileMap.getLayers().get(10);
+        for (MapObject object : b.getObjects()) {
+            System.out.println("Object: " + object.getProperties());
+        }
+
+        Iterator it = b.getProperties().getKeys();
+        while(it.hasNext()){
+            System.out.println("iterator: " + it.next());
+        }
         dice = new TmxMapLoader().load("dice.tmx");
         System.out.println(dice.getTileSets().getTile(1));
         tileMap.getTileSets().getTileSet(1).putTile(3, dice.getTileSets().getTile(1));
@@ -82,13 +102,15 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void render() {
+       System.out.println(Gdx.input.getX() + ", " + Gdx.input.getY());
+
         Gdx.graphics.getGL20().glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        if (playerManager.getFocussedPlayer() != null) {
-            camera.position.set(player.getPosX(), player.getPosY(), 0);
-        }
+          if (playerManager.getFocussedPlayer() != null) {
+                   camera.position.set(player.getPosX(), player.getPosY(), 0);
+               }
         camera.update();
 
 
@@ -151,8 +173,13 @@ public class Game extends ApplicationAdapter {
     public void setMinigame(Minigame minigame) {
         this.currentMinigame = minigame;
     }
+
     //draw a swastika
     public PlayerManager getPlayerManager() {
         return playerManager;
+    }
+
+    public TileManager getTileManager() {
+        return tileManager;
     }
 }

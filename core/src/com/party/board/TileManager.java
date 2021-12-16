@@ -8,15 +8,19 @@ public class TileManager {
     public TileManager() {
     }
 
-    private void load() {
-        addTile(new Tile(30,30));
-        addTile(new Tile(40,30));
-        addTile(new Tile(50,30));
-        addTile(new Tile(60,30).);
+    public void load() {
+        addTile(new Tile(272,335));
+        addTile(new Tile(272,310));
+        addTile(new Tile(272,295));
+        addTile(new Tile(272,270));
+
     }
 
     private void addTile(Tile tile){
         this.tileMap.put(tileMap.size(), tile);
     }
 
+    public Map<Integer, Tile> getTileMap() {
+        return tileMap;
+    }
 }
