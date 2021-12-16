@@ -35,11 +35,9 @@ public class Game extends ApplicationAdapter {
     @Override
     public void create() {
         System.out.println("\uD83D\uDC4B");
-
         game = this;
         player = playerManager.createPlayer();
         player.setFocussed(true);
-
         Player playertest = playerManager.createPlayer();
         tileMap = new TmxMapLoader().load("gameboardv2.tmx");
         dice = new TmxMapLoader().load("dice.tmx");
@@ -151,18 +149,16 @@ public class Game extends ApplicationAdapter {
         return playerManager;
     }
 
+    /**
+     * diceRoll gives a random number between 1 and 6 and makes the layers responsible for those numbers visible.
+     */
     public void diceRoll() {
         int max = 6;
         int min = 1;
         int range = max - min + 1;
         int roll = (int)(Math.random() * range) + min;
         for (int i = 1; i<7; i++) {
-            if (i==roll) {
-                tileMap.getLayers().get(i+11).setVisible(true);
-            }
-            else {
-                tileMap.getLayers().get(i+11).setVisible(false);
-            }
+            tileMap.getLayers().get(i+11).setVisible(i == roll);
         }
         System.out.println(roll);
     }
