@@ -120,7 +120,7 @@ public class Game extends ApplicationAdapter {
         renderer.setView(camera);
         renderer.render();
 
-        batch.setProjectionMatrix(camera.combined);
+     //   batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
 
