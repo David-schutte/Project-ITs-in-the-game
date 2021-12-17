@@ -1,48 +1,26 @@
 package com.party.board;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.party.Game;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class TileManager {
     Map<Integer, Tile> tileMap = new HashMap<Integer, Tile>();
     public TileManager() {
+        //autoLoad();
+        load();
     }
 
     public void load() {
-//        addTile(new Tile(272,335));
-//        addTile(new Tile(272,315));
-//        addTile(new Tile(272,295));
-//        addTile(new Tile(255,284));
-//        addTile(new Tile(245,271));
-//        addTile(new Tile(245,250));
-//        addTile(new Tile(245,228));
-//        addTile(new Tile(245,209));
-//        addTile(new Tile(245,187));
-//        addTile(new Tile(265,187));
-//        addTile(new Tile(283,187));
-//        addTile(new Tile(302,187));
-//        addTile(new Tile(318,187));
-//        addTile(new Tile(338,187));
-//        addTile(new Tile(355,187));
-//        addTile(new Tile(373,187));
-//        addTile(new Tile(373,209));
-//        addTile(new Tile(393,209));
-//        addTile(new Tile(411,209));
-//        addTile(new Tile(429,209));
-//        addTile(new Tile(447,209));
-//        addTile(new Tile(465,209));
-//        addTile(new Tile(483,209));
-//        addTile(new Tile(501,209));
-//        addTile(new Tile(520,209));
-//        addTile(new Tile(538,209));
-//        addTile(new Tile(557,209));
-//        addTile(new Tile(575,209));
-//        addTile(new Tile(593,209));
-//        addTile(new Tile(593,230));
-        addTile(new Tile(593,251));
-        addTile(new Tile(603,272));
-        addTile(new Tile(620,272));
-        addTile(new Tile(638,272));
+       addTile(new Tile(63,264));
+       addTile(new Tile(63,232));
+       addTile(new Tile(63,202));
+
 
 
 
@@ -59,5 +37,36 @@ public class TileManager {
     }
     public Map<Integer, Tile> getTileMap() {
         return tileMap;
+    }
+
+    private void autoLoad(){
+
+        TiledMap tileMap = Game.i().getTileMap();
+        TiledMapTileLayer layer = ((TiledMapTileLayer)tileMap.getLayers().get(10));
+
+        if(layer == null) {
+            System.out.println("Layer is null");
+            return;
+        }
+
+        //for each coorindate in the layer
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                //get the tile
+                if(layer.getCell(x,y) == null) continue;
+                TiledMapTile object = layer.getCell(x,y).getTile();
+                if(object != null){
+                    //get the tile id
+//                    int id = object.getProperties().get("id", Integer.class);
+                    //get the tile
+
+                    System.out.println(object);
+                }
+            }
+        }
+
+       for (MapObject object : layer.getObjects()) {
+            System.out.println(object.getName());
+        }
     }
 }

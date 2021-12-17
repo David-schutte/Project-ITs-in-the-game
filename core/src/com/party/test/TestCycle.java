@@ -26,18 +26,18 @@ public class TestCycle {
 
 
        // if(true) return;
-        final Tile tile = Game.i().getTileManager().getTileMap().get(0);
-        System.out.println("GOAL: " + tile.getX());
+
 
         for (final Entity entity : Game.i().entities) {
-            entity.setEndX(500);
-            entity.setEndY(500);
+            entity.setEndX( Game.i().getTileManager().getTileMap().get(0).getX());
+            entity.setEndY( Game.i().getTileManager().getTileMap().get(0).getY());
 
             for (final Integer integer : Game.i().getTileManager().getTileMap().keySet()) {
                 Timer timer = new Timer();
                 TimerTask timerTask = new TimerTask() {
                     @Override
                     public void run() {
+                        System.out.println("moving...");
                         entity.setEndX(Game.i().getTileManager().getTileMap().get(integer).getX());
                         entity.setEndY(Game.i().getTileManager().getTileMap().get(integer).getY());
                     }

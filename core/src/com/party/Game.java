@@ -13,8 +13,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.party.board.TileManager;
 import com.party.entity.Entity;
 import com.party.entity.Player;
@@ -44,11 +42,10 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void create() {
-        System.out.println("\uD83D\uDC4B");
+        //  System.out.println("\uD83D\uDC4B");
 
         game = this;
-        tileManager = new TileManager();
-        tileManager.load();
+        //  tileManager.load();
         player = playerManager.createPlayer();
         player.setFocussed(true);
 
@@ -60,7 +57,7 @@ public class Game extends ApplicationAdapter {
         }
 
         Iterator it = b.getProperties().getKeys();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             System.out.println("iterator: " + it.next());
         }
         dice = new TmxMapLoader().load("dice.tmx");
@@ -75,49 +72,52 @@ public class Game extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
 
-      //  Viewport cameraViewport = new Viewport(camera.(), camera.getHeight);
+        //  Viewport cameraViewport = new Viewport(camera.(), camera.getHeight);
 
 
         camera.setToOrtho(false, 1600, 960);
         //follow player with camera
-        camera.position.set(player.getX(), player.getY(), 0);
+        //   camera.position.set(player.getX(), player.getY(), 0);
 
-        camera.update();
+        //     camera.update();
+        tileManager = new TileManager();
 
 
         batch = new SpriteBatch();
         renderer = new OrthogonalTiledMapRenderer(tileMap);
         renderer.render();
 
-        new TestCycle().go();
+          new TestCycle().go();
 
     }
 
 
     @Override
     public void render() {
-       System.out.println(Gdx.input.getX() + ", " + Gdx.input.getY());
+        //  System.out.println(Gdx.input.getX() + ", " + Gdx.input.getY());
 
         Gdx.graphics.getGL20().glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-          if (playerManager.getFocussedPlayer() != null) {
-                   camera.position.set(player.getPosX(), player.getPosY(), 0);
-               }
+      // if (playerManager.getFocussedPlayer() != null) {
+      //     camera.position.set(player.getPosX(), player.getPosY(), 0);
+      // }
         camera.update();
 
 
         renderer.setView(camera);
         renderer.render();
 
-     //   batch.setProjectionMatrix(camera.combined);
+        //   batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
 
         if (currentMinigame != null) {
             currentMinigame.onKeyPress();
         }
+
+
         for (Entity entity : entities) {
             entity.render(batch);
             entity.onTick();
@@ -191,5 +191,9 @@ public class Game extends ApplicationAdapter {
             tileMap.getLayers().get(i+11).setVisible(i == roll);
         }
         System.out.println(roll);
+    }
+
+    public TiledMap getTileMap() {
+        return tileMap;
     }
 }
