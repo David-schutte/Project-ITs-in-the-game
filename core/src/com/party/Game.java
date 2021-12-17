@@ -31,15 +31,11 @@ public class Game extends ApplicationAdapter {
     TiledMap tileMap;
     TiledMap dice;
     Minigame currentMinigame;
-    TiledMapTileSet dicetiles;
     TileManager tileManager;
-    TiledMapTile dice1;
     OrthogonalTiledMapRenderer renderer;
     PlayerManager playerManager = new PlayerManager();
     OrthographicCamera camera;
     Sprite playerSprite;
-//    TiledMapTileLayer.Cell half1;
-//    TiledMapTileLayer layer2;
 
     static Game game;
     private Player player;
@@ -72,14 +68,9 @@ public class Game extends ApplicationAdapter {
         tileMap.getTileSets().getTileSet(1).putTile(3, dice.getTileSets().getTile(1));
         entities.add(player);
         entities.add(playertest);
-//        System.out.println(tileMap.getTileSets().toString());
-//        dicetileset = tileMap.getTileSets().getTileSet(0);
-//        dice1 = dice.getTile(485);
-//        half1.setTile(dice1);
-//        layer2.setCell(5,5, half1);
-//        System.out.println(dice1);
         float w = 1600;
         float h = 960;
+        diceRoll();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -186,5 +177,19 @@ public class Game extends ApplicationAdapter {
 
     public TileManager getTileManager() {
         return tileManager;
+    }
+
+    /**
+     * diceRoll gives a random number between 1 and 6 and makes the layers responsible for those numbers visible.
+     */
+    public void diceRoll() {
+        int max = 6;
+        int min = 1;
+        int range = max - min + 1;
+        int roll = (int)(Math.random() * range) + min;
+        for (int i = 1; i<7; i++) {
+            tileMap.getLayers().get(i+11).setVisible(i == roll);
+        }
+        System.out.println(roll);
     }
 }
