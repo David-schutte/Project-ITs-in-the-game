@@ -76,14 +76,7 @@ public class Game extends ApplicationAdapter {
 
 
         camera.setToOrtho(false, 1600, 960);
-        //follow player with camera
-<<<<<<< Updated upstream
-        //   camera.position.set(player.getX(), player.getY(), 0);
-=======
-//        camera.position.set(player.getX(), player.getY(), 0);
->>>>>>> Stashed changes
 
-        //     camera.update();
         tileManager = new TileManager();
 
 
@@ -104,15 +97,6 @@ public class Game extends ApplicationAdapter {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-<<<<<<< Updated upstream
-      // if (playerManager.getFocussedPlayer() != null) {
-      //     camera.position.set(player.getPosX(), player.getPosY(), 0);
-      // }
-=======
-//          if (playerManager.getFocussedPlayer() != null) {
-//                   camera.position.set(player.getPosX(), player.getPosY(), 0);
-//               }
->>>>>>> Stashed changes
         camera.update();
 
 
