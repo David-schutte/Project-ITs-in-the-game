@@ -17,15 +17,17 @@ public class TileManager {
     }
 
     public void load() {
-       addTile(new Tile(63,264));
-       addTile(new Tile(63,232));
-       addTile(new Tile(63,202));
-
-
-
-
-
-
+        addTile(new Tile(63,264));
+        addTile(new Tile(63,264));
+        addTile(new Tile(63,264));
+        addTile(new Tile(63,231));
+        addTile(new Tile(63,200));
+        addTile(new Tile(38,183));
+        addTile(new Tile(24,167));
+        addTile(new Tile(24,137));
+        addTile(new Tile(24,105));
+        addTile(new Tile(24,72));
+        addTile(new Tile(24,40));
     }
 
     private void addTile(Tile tile){
