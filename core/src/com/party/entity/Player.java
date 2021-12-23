@@ -11,7 +11,10 @@ import com.party.Game;
 public class Player extends Entity {
 
     private boolean focussed;
-    public int points;
+    private int points;
+    private int money;
+    private int stars;
+
 
 
 
@@ -60,5 +63,20 @@ public class Player extends Entity {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+    public int getMoney() {
+        return money;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
+    public int getStars() {
+        return stars;
     }
 }

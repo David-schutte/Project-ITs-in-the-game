@@ -24,15 +24,15 @@ public class TileManager {
         addTile(new Tile(63,200));
 //        splitsing onderlangs
         addTile(new Tile(38,183));
-        addTile(new Tile(24,167));
+        addTile(new Tile(24,167).setRemovesMoney(true));
         addTile(new Tile(24,137));
         addTile(new Tile(24,105));
         addTile(new Tile(24,72));
         addTile(new Tile(24,40));
-        addTile(new Tile(50,40));
+        addTile(new Tile(50,40).setSpecial(true));
         addTile(new Tile(75,40));
         addTile(new Tile(101,40));
-        addTile(new Tile(126,40));
+        addTile(new Tile(126,40).setRemovesMoney(true));
         addTile(new Tile(152,40));
         addTile(new Tile(178,40));
         addTile(new Tile(203,40));

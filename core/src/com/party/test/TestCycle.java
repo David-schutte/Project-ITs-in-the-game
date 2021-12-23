@@ -31,13 +31,16 @@ public class TestCycle {
                 TimerTask timerTask = new TimerTask() {
                     @Override
                     public void run() {
-                        System.out.println("moving...");
+
+
 
                         entity.setEndX(Game.i().getTileManager().getTileMap().get(integer).getX());
                         entity.setEndY(Game.i().getTileManager().getTileMap().get(integer).getY());
+                        System.out.println("Current: "+ integer + " Tile: " + Game.i().getTileManager().getTileMap().get(integer));
+
                     }
                 };
-                timer.schedule(timerTask, 3000L + integer * 2000L);
+                timer.schedule(timerTask, 2000L + integer * 1500L);
             }
         }
     }

@@ -2,8 +2,10 @@ package com.party;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
@@ -18,6 +20,7 @@ import com.party.entity.Entity;
 import com.party.entity.Player;
 import com.party.entity.PlayerManager;
 import com.party.minigame.Minigame;
+import com.party.screen.Renderer;
 import com.party.test.TestCycle;
 
 import java.util.HashSet;
@@ -32,8 +35,11 @@ public class Game extends ApplicationAdapter {
     TileManager tileManager;
     OrthogonalTiledMapRenderer renderer;
     PlayerManager playerManager = new PlayerManager();
+    BitmapFont font ;
+
     OrthographicCamera camera;
     Sprite playerSprite;
+    Renderer textRenderer;
 
     static Game game;
     private Player player;
@@ -42,12 +48,17 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void create() {
+        font = new BitmapFont();
+        System.out.println(font);
+        textRenderer = new Renderer();
         //  System.out.println("\uD83D\uDC4B");
+
 
         game = this;
         //  tileManager.load();
         player = playerManager.createPlayer();
         player.setFocussed(true);
+        player.setMoney(69);
 
         Player playertest = playerManager.createPlayer();
         tileMap = new TmxMapLoader().load("gameboard.tmx");
@@ -64,6 +75,7 @@ public class Game extends ApplicationAdapter {
         System.out.println(dice.getTileSets().getTile(1));
         tileMap.getTileSets().getTileSet(1).putTile(3, dice.getTileSets().getTile(1));
         entities.add(player);
+
         entities.add(playertest);
         float w = 1600;
         float h = 960;
@@ -74,8 +86,6 @@ public class Game extends ApplicationAdapter {
 
         //  Viewport cameraViewport = new Viewport(camera.(), camera.getHeight);
 
-
-        camera.setToOrtho(false, 1600, 960);
 
         tileManager = new TileManager();
 
@@ -106,7 +116,6 @@ public class Game extends ApplicationAdapter {
         //   batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-
         if (currentMinigame != null) {
             currentMinigame.onKeyPress();
         }
@@ -116,17 +125,7 @@ public class Game extends ApplicationAdapter {
             entity.render(batch);
             entity.onTick();
         }
-        // if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-
-        //     TiledMapTile b =tileMap.getTileSets().getTile(30);
-
-        //     player.setX(Gdx.input.getX());
-        //     player.setY(Gdx.input.getY());
-        //     (new Vector2(Gdx.input.getX(), Gdx.input.getY()));
-        //     System.out.println(player.getX() + " l " + Gdx.input.getX());
-
-        //     player.draw(batch, 255f);
-        // }
+        textRenderer.render(font, batch,camera,"ddddddddddddddddddddddddddddddddddddd!!");
         batch.end();
     }
 
