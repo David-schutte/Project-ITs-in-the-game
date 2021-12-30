@@ -39,14 +39,6 @@ public class Entity extends Actor {
         return this.y;
     }
 
-    public int getEndX() {
-        return this.endX;
-    }
-
-    public int getEndY() {
-        return this.endY;
-    }
-
     public void setEndX(int x){this.endX = x;}
     public void setEndY(int y){this.endY = y;}
 
@@ -58,17 +50,11 @@ public class Entity extends Actor {
         this.texture = texture;
     }
 
-    public void moveTo(int targetX, int targetY) {
-        this.endX = targetX;
-        this.endY = targetY;
-    }
-
     public void move() {
         if (x > endX) x -= speed;
         if (x < endX) x += speed;
         if (y > endY) y -= speed;
         if (y < endY) y += speed;
-
     }
 
     public void onTick() {

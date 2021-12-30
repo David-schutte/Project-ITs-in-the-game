@@ -58,7 +58,7 @@ public class Game extends ApplicationAdapter {
         //  tileManager.load();
         player = playerManager.createPlayer();
         player.setFocussed(true);
-        player.setMoney(69);
+        player.setMoney(0);
 
         Player playertest = playerManager.createPlayer();
         tileMap = new TmxMapLoader().load("gameboard.tmx");
@@ -127,6 +127,14 @@ public class Game extends ApplicationAdapter {
         }
         textRenderer.render(font, batch,camera,"ddddddddddddddddddddddddddddddddddddd!!");
         batch.end();
+
+        if(Math.random() > 0.95){
+            player.setMoney(player.getMoney() + 1);
+
+        }
+        if(Math.random() > 0.995){
+            player.setStars(player.getStars() + 1);
+        }
     }
 
     @Override
