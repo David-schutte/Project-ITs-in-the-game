@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,7 +21,7 @@ import com.party.entity.PlayerManager;
 import com.party.minigame.Minigame;
 import com.party.screen.Renderer;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Game extends ApplicationAdapter {
@@ -39,7 +40,9 @@ public class Game extends ApplicationAdapter {
     static Game game;
     private Player player1;
     private Player player2;
-    public HashSet<Entity> entities = new HashSet<>();
+    private Player activeplayer;
+    public ArrayList<Entity> entities = new ArrayList<>();
+    int activeplayer_id;
 
 
     @Override
@@ -47,11 +50,8 @@ public class Game extends ApplicationAdapter {
         font = new BitmapFont();
         System.out.println(font);
         textRenderer = new Renderer();
-        //  System.out.println("\uD83D\uDC4B");
-
 
         game = this;
-        //  tileManager.load();
 
 
         tileMap = new TmxMapLoader().load("gameboard.tmx");
@@ -72,36 +72,57 @@ public class Game extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
 
-        //  Viewport cameraViewport = new Viewport(camera.(), camera.getHeight);
-
-
         tileManager = new TileManager();
 
-        player1 = playerManager.createPlayer(game);
-        player2 = playerManager.createPlayer(game);
+        player1 = playerManager.createPlayer(game, new Texture(Gdx.files.internal("first_player.png")));
+        player2 = playerManager.createPlayer(game, new Texture(Gdx.files.internal("second_player.png")));
         entities.add(player1);
         entities.add(player2);
+
+        activeplayer_id = startingPlayer();
+        int playernumber = activeplayer_id + 1;
+        System.out.println("Player " + playernumber + " may start.");
+        activeplayer = (Player) entities.get(activeplayer_id);
 
         batch = new SpriteBatch();
         renderer = new OrthogonalTiledMapRenderer(tileMap);
         renderer.render();
 
-//        new TestCycle().go(diceRoll());
     }
 
     private void input() {
-//        System.out.println(Gdx.input.);
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
-        }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.R)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             int roll = diceRoll();
-            int new_location = player1.getCurrent_tile_id()+roll;
+            int new_location = activeplayer.getCurrent_tile_id() + roll;
             if (new_location > 72) {
-                new_location = new_location-73;
+                new_location = new_location - 73;
             }
-            player1.setCurrent_tile_id(new_location);
-            System.out.println("Current tile id:" + player1.getCurrent_tile_id());
+            activeplayer.setCurrent_tile_id(new_location);
+            System.out.println("Current tile id:" + activeplayer.getCurrent_tile_id());
+            if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isSpecial()) {
+
+            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isGivesMoney()) {
+                activeplayer.setMoney(activeplayer.getMoney() + 3);
+            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isRemovesMoney()) {
+                if (activeplayer.getMoney() > 3) {
+                    activeplayer.setMoney(activeplayer.getMoney() - 3);
+                } else {
+                    activeplayer.setMoney(0);
+                }
+            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isBuyCoffee()) {
+                if (activeplayer.getMoney() >= 20) {
+                    activeplayer.setMoney(activeplayer.getMoney()-20);
+                    activeplayer.setCoffee(activeplayer.getCoffee()+1);
+                }
+            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isRemovesCoffee()) {
+                if (activeplayer.getCoffee() >= 1) {
+                    activeplayer.setCoffee(activeplayer.getCoffee() - 1);
+                }
+            }
+            activeplayer_id = (activeplayer_id + 1) % 2;
+            activeplayer = (Player) entities.get(activeplayer_id);
         }
     }
 
@@ -119,7 +140,6 @@ public class Game extends ApplicationAdapter {
         renderer.setView(camera);
         renderer.render();
 
-        //   batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
         if (currentMinigame != null) {
@@ -133,14 +153,6 @@ public class Game extends ApplicationAdapter {
 
         textRenderer.render(font, batch, camera, "aa!!");
         batch.end();
-
-        if (Math.random() > 0.95) {
-            player1.setMoney(player1.getMoney() + 1);
-
-        }
-        if (Math.random() > 0.995) {
-            player1.setStars(player1.getStars() + 1);
-        }
     }
 
     @Override
@@ -177,7 +189,6 @@ public class Game extends ApplicationAdapter {
         this.currentMinigame = minigame;
     }
 
-    //draw a swastika
     public PlayerManager getPlayerManager() {
         return playerManager;
     }
@@ -202,6 +213,16 @@ public class Game extends ApplicationAdapter {
         System.out.println(roll);
         return roll;
     }
+
+    public int startingPlayer() {
+        int max = 1;
+        int min = 0;
+        int range = max - min + 1;
+        int startingplayer = (int) (Math.random() * range) + min;
+        System.out.println(startingplayer);
+        return startingplayer;
+    }
+
 
     public TiledMap getTileMap() {
         return tileMap;

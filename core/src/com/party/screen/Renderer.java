@@ -50,19 +50,13 @@ public class Renderer {
 
     public void render(BitmapFont bitmap, Batch batch, Camera camera, String text) {
 
-        // freetypeFontGenerator.generateFont(FreeTypeFontGenerator.FreeTypeFontParameterbitmap);
-     //   batch.setProjectionMatrix(camera.combined);
-
         font40.setColor(Color.YELLOW);
-       // font40.draw(batch, text, 10, camera.viewportHeight - 10);
         drawPlayerStatistics(batch, camera);
-     //   batch.setProjectionMatrix(camera.view);
     }
 
     public void drawPlayerStatistics(Batch batch, Camera camera) {
         Player player1 = Game.i().getPlayerManager().getPlayers().get(0);
         Player player2 = Game.i().getPlayerManager().getPlayers().get(1);
-
 
         font40.draw(batch, "Speler 1", 10, 470);
         font40.draw(batch, "Speler 2", 550, 470);
@@ -70,18 +64,13 @@ public class Renderer {
         font40.draw(batch, "Geld: " + player1.getMoney(), 30, 445);
         font40.draw(batch, "Geld: " + player2.getMoney(), 560, 445);
 
-        font40.draw(batch, "Koffie: " + player1.getStars(), 30, 420);
-        font40.draw(batch, "Koffie: " + player2.getStars(), 550, 420);
-
+        font40.draw(batch, "Koffie: " + player1.getCoffee(), 30, 420);
+        font40.draw(batch, "Koffie: " + player2.getCoffee(), 550, 420);
 
         batch.draw(wallet,0, 425);
         batch.draw(wallet,530, 425);
 
         batch.draw(star,0, 400);
         batch.draw(star,520, 400);
-
-
-
     }
-
 }

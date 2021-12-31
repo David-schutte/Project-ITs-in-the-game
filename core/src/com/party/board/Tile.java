@@ -6,6 +6,8 @@ public class Tile {
     boolean special = false;
     boolean givesMoney = false;
     boolean removesMoney = false;
+    boolean buyCoffee = false;
+    boolean removesCoffee = false;
 
     public int getX() {
         return x;
@@ -13,6 +15,14 @@ public class Tile {
 
     public int getY() {
         return y;
+    }
+
+    public boolean isBuyCoffee() {
+        return buyCoffee;
+    }
+
+    public boolean isRemovesCoffee() {
+        return removesCoffee;
     }
 
     public boolean isSpecial() {
@@ -31,16 +41,27 @@ public class Tile {
         this.x = x;
         this.y = y;
     }
+
+    public Tile setRemovesCoffee(boolean removesCoffee) {
+        this.removesCoffee = removesCoffee;
+        return this;
+    }
+
+    public Tile setBuyCoffee(boolean buycoffee) {
+        this.buyCoffee = buycoffee;
+        return this;
+    }
+
     public Tile setSpecial(boolean special){
         this.special = special;
         return this;
     }
-    public Tile setGivesMoney(boolean b){
-        this.givesMoney = b;
+    public Tile setGivesMoney(boolean givemoney){
+        this.givesMoney = givemoney;
         return this;
     }
-    public Tile setRemovesMoney(boolean b){
-        this.removesMoney = b;
+    public Tile setRemovesMoney(boolean removemoney){
+        this.removesMoney = removemoney;
         return this;
     }
 

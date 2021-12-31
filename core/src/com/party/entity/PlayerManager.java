@@ -1,5 +1,6 @@
 package com.party.entity;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.party.Game;
 import java.util.ArrayList;
 
@@ -14,8 +15,14 @@ public class PlayerManager {
         return players;
     }
 
-    public Player createPlayer(Game game){
-        Player player = new Player(game);
+    /**
+     * This method creates a player
+     * @param game
+     * @param playertexture
+     * @return player
+     */
+    public Player createPlayer(Game game, Texture playertexture){
+        Player player = new Player(game, playertexture);
         add(player);
         return player;
     }

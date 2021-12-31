@@ -1,6 +1,5 @@
 package com.party.entity;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +12,7 @@ public class Player extends Entity {
     private boolean focussed;
     private int points;
     private int money;
-    private int stars;
+    private int coffee;
 
     public int getCurrent_tile_id() {
         return current_tile_id;
@@ -29,11 +28,7 @@ public class Player extends Entity {
 
     private float speed = 2f;
 
-    Texture playerTexture = new Texture(Gdx.files.internal("first_player.png"));
-
-
-
-    public Player(Game game) {
+    public Player(Game game, Texture playerTexture) {
         super();
         setTexture(playerTexture);
 
@@ -48,7 +43,7 @@ public class Player extends Entity {
         setEndY(getPosY());
         focussed = false;
         money = 0;
-        stars = 0;
+        coffee = 0;
     }
 
     private Action runningAction;
@@ -95,11 +90,11 @@ public class Player extends Entity {
         return money;
     }
 
-    public void setStars(int stars) {
-        this.stars = stars;
+    public void setCoffee(int coffee) {
+        this.coffee = coffee;
     }
 
-    public int getStars() {
-        return stars;
+    public int getCoffee() {
+        return coffee;
     }
 }
