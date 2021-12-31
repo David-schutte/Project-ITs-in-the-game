@@ -15,19 +15,40 @@ public class Player extends Entity {
     private int money;
     private int stars;
 
+    public int getCurrent_tile_id() {
+        return current_tile_id;
+    }
 
+    public void setCurrent_tile_id(int current_tile_id) {
+        this.current_tile_id = current_tile_id;
+        setEndX(Game.i().getTileManager().getTileMap().get(current_tile_id).getX());
+        setEndY(Game.i().getTileManager().getTileMap().get(current_tile_id).getY());
+    }
 
+    private int current_tile_id = 0;
 
     private float speed = 2f;
 
     Texture playerTexture = new Texture(Gdx.files.internal("first_player.png"));
 
-    public Player() {
+
+
+    public Player(Game game) {
         super();
         setTexture(playerTexture);
-        setPosX(200);
-        setPosY(100);
 
+        // set the position we currently at, setPosx/y is a SCREEN position.
+        // position is based on .getTileMap.get(0) which is the first in the tileset
+        // collection
+        setPosX(game.getTileManager().getTileMap().get(current_tile_id).getX());
+        setPosY(game.getTileManager().getTileMap().get(current_tile_id).getY());
+
+        // setEndX/y is the 'goal' position. The location we want to get to.
+        setEndX(getPosX());
+        setEndY(getPosY());
+        focussed = false;
+        money = 0;
+        stars = 0;
     }
 
     private Action runningAction;
@@ -46,7 +67,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha){
+    public void draw(Batch batch, float parentAlpha) {
         batch.draw(Game.i().getPlayerSprite(), getPosX(), getPosY());
     }
 
@@ -57,6 +78,7 @@ public class Player extends Entity {
     public void setFocussed(boolean focussed) {
         this.focussed = focussed;
     }
+
     public int getPoints() {
         return points;
     }
@@ -68,6 +90,7 @@ public class Player extends Entity {
     public void setMoney(int money) {
         this.money = money;
     }
+
     public int getMoney() {
         return money;
     }
