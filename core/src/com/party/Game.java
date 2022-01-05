@@ -43,7 +43,7 @@ public class Game extends ApplicationAdapter {
     private Player activeplayer;
     public ArrayList<Entity> entities = new ArrayList<>();
     int activeplayer_id;
-
+    int roll;
 
     @Override
     public void create() {
@@ -94,7 +94,7 @@ public class Game extends ApplicationAdapter {
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            int roll = diceRoll();
+            roll = diceRoll();
             int new_location = activeplayer.getCurrent_tile_id() + roll;
             if (new_location > 72) {
                 new_location = new_location - 73;
@@ -151,7 +151,7 @@ public class Game extends ApplicationAdapter {
             entity.onTick();
         }
 
-        textRenderer.render(font, batch, camera, "aa!!");
+        textRenderer.render(font, batch, camera, "aa!!", roll);
         batch.end();
     }
 
@@ -207,11 +207,9 @@ public class Game extends ApplicationAdapter {
         int min = 1;
         int range = max - min + 1;
         int roll = (int) (Math.random() * range) + min;
-        for (int i = 1; i < 7; i++) {
-            tileMap.getLayers().get(i + 11).setVisible(i == roll);
-        }
         System.out.println(roll);
         return roll;
+
     }
 
     public int startingPlayer() {
