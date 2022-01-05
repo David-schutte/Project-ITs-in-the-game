@@ -97,4 +97,14 @@ public class Player extends Entity {
     public int getCoffee() {
         return coffee;
     }
+
+    @Override
+    public int getEndX() {
+        return Game.i().getTileManager().getTileMap().get(current_tile_id).getX();
+    }
+
+    @Override
+    public int getEndY() {
+        return Game.i().getTileManager().getTileMap().get(current_tile_id).getY();
+    }
 }

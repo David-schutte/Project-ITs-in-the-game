@@ -1,7 +1,6 @@
 package com.party.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -47,12 +46,26 @@ public class Renderer {
         menuFont.setColor(Color.TAN);
     }
 
-    public void render(BitmapFont bitmap, Batch batch, Camera camera, int roll, int playernumber) {
+    public void render(Batch batch, int roll, int playernumber, boolean turn_over) {
         font40.setColor(Color.YELLOW);
-        drawPlayerStatistics(batch, camera, roll, playernumber);
+        drawPlayerStatistics(batch);
+        drawAdditionalMessages(batch, playernumber, turn_over, roll);
     }
 
-    public void drawPlayerStatistics(Batch batch, Camera camera, int roll, int playernumber) {
+    private void drawAdditionalMessages(Batch batch, int playernumber, boolean turn_over, int roll) {
+        font40.draw(batch, "Speler " + playernumber, 120, 285);
+        font40.draw(batch, "mag gooien!", 120, 265);
+        //only display roll if there was a roll, not on the initial screen
+        if (roll!=0) {
+            font40.draw(batch, "" + roll, 260, 210);
+        }
+        if (!turn_over) {
+            font40.draw(batch, "Wil je koffie kopen? j / n", 300, 200);
+
+        }
+    }
+
+    public void drawPlayerStatistics(Batch batch) {
         Player player1 = Game.i().getPlayerManager().getPlayers().get(0);
         Player player2 = Game.i().getPlayerManager().getPlayers().get(1);
 
@@ -70,11 +83,6 @@ public class Renderer {
 
         batch.draw(coffee,10, 400);
         batch.draw(coffee,510, 400);
-        font40.draw(batch, "Speler " + playernumber, 120, 285);
-        font40.draw(batch, "mag gooien!", 120, 265);
-        //only display roll if there was a roll, not on the initial screen
-        if (roll!=0) {
-            font40.draw(batch, "" + roll, 260, 210);
-        }
+
     }
 }

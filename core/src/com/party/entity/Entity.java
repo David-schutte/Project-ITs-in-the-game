@@ -8,9 +8,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Entity extends Actor {
-    private int x;
-    private int y;
+public abstract class Entity extends Actor {
+    protected int x;
+    protected int y;
 
     private int endX;
     private int endY;
@@ -19,16 +19,11 @@ public class Entity extends Actor {
 
 
     public Entity() {
-
     }
 
     public void render(Batch batch) {
 
         batch.draw(texture, x, y);
-    }
-
-    public void setPosX(int x) {
-        this.x = x;
     }
 
     public int getPosX() {
@@ -39,15 +34,19 @@ public class Entity extends Actor {
         return this.y;
     }
 
-    public void setEndX(int x){this.endX = x;}
-    public void setEndY(int y){this.endY = y;}
-
-    public int getEndX() {
-        return this.x;
+    public void setEndX(int x){
+        this.endX = x;
     }
 
-    public int getEndY() {
-        return this.y;
+    public void setEndY(int y){
+        this.endY = y;
+    }
+    abstract public int getEndX();
+
+    abstract public int getEndY();
+
+    public void setPosX(int x) {
+        this.x = x;
     }
 
     public void setPosY(int y) {
