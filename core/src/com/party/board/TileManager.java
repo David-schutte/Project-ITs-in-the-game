@@ -90,10 +90,10 @@ public class TileManager {
         addTile(new Tile(523, 328).setGivesMoney(true));
         addTile(new Tile(523, 360).setBuyCoffee(true));
         addTile(new Tile(510, 376).setBuyCoffee(true));
-        addTile(new Tile(484, 376).setRemovesMoney(true));
-        addTile(new Tile(459, 376).setRemovesMoney(true));
-        addTile(new Tile(446, 360).setGivesMoney(true));
-        addTile(new Tile(446, 328).setGivesMoney(true));
+        addTile(new Tile(484, 376).setBuyCoffee(true));//remove money
+        addTile(new Tile(459, 376).setBuyCoffee(true));//remove money
+        addTile(new Tile(446, 360).setBuyCoffee(true));//give money
+        addTile(new Tile(446, 328).setBuyCoffee(true));//give money
         addTile(new Tile(446, 296).setGivesMoney(true));
         addTile(new Tile(421, 263).setGivesMoney(true));
         addTile(new Tile(395, 263).setSpecial(true));

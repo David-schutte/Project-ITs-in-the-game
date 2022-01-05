@@ -20,7 +20,6 @@ import com.party.entity.Player;
 import com.party.entity.PlayerManager;
 import com.party.minigame.Minigame;
 import com.party.screen.Renderer;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -47,6 +46,7 @@ public class Game extends ApplicationAdapter {
     int playernumber = activeplayer_id + 1;
     boolean moving = false;
     boolean turn_over = true;
+    boolean n_is_pressed = false;
 
     @Override
     public void create() {
@@ -95,13 +95,14 @@ public class Game extends ApplicationAdapter {
             Gdx.app.exit();
         }
         if (!turn_over) {
-            if (Gdx.input.isKeyPressed(Input.Keys.J)) {
+//            System.out.println("Turn over false");
+            if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
                 activeplayer.setMoney(activeplayer.getMoney() - 20);
                 activeplayer.setCoffee(activeplayer.getCoffee() + 1);
                 turn_over = true;
-            }
-            if (Gdx.input.isKeyPressed((Input.Keys.N))) {
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
                 turn_over = true;
+                n_is_pressed = true;
             }
         } else {
             for (Entity player : entities) {
@@ -119,10 +120,6 @@ public class Game extends ApplicationAdapter {
                     }
                     activeplayer.setCurrent_tile_id(new_location);
                     moving = true;
-                    System.out.println("Current tile id:" + activeplayer.getCurrent_tile_id());
-
-                    System.out.println(activeplayer.getEndX());
-                    System.out.println(activeplayer.getEndY());
                 }
             }
         }
@@ -182,11 +179,7 @@ public class Game extends ApplicationAdapter {
                     }
                     turn_over = true;
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isBuyCoffee()) {
-                    if (activeplayer.getMoney() >= 20) {
-                        turn_over = false;
-                    } else {
-                        turn_over = true;
-                    }
+                    turn_over = activeplayer.getMoney() < 20 || n_is_pressed;
 
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id())
                     .isRemovesCoffee()) {
@@ -197,10 +190,10 @@ public class Game extends ApplicationAdapter {
                 }
 
                 if (turn_over) {
-                    // turn over
                     activeplayer_id = (activeplayer_id + 1) % 2;
                     activeplayer = (Player) entities.get(activeplayer_id);
                     playernumber = activeplayer_id + 1;
+                    n_is_pressed = false;
                     moving = false;
                 }
             }
