@@ -42,8 +42,9 @@ public class Game extends ApplicationAdapter {
     private Player player2;
     private Player activeplayer;
     public ArrayList<Entity> entities = new ArrayList<>();
-    int activeplayer_id;
+    int activeplayer_id = startingPlayer();
     int roll;
+    int playernumber = activeplayer_id + 1;
 
     @Override
     public void create() {
@@ -67,7 +68,6 @@ public class Game extends ApplicationAdapter {
 
         float w = 1600;
         float h = 960;
-        diceRoll();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -79,50 +79,60 @@ public class Game extends ApplicationAdapter {
         entities.add(player1);
         entities.add(player2);
 
-        activeplayer_id = startingPlayer();
-        int playernumber = activeplayer_id + 1;
         System.out.println("Player " + playernumber + " may start.");
         activeplayer = (Player) entities.get(activeplayer_id);
 
         batch = new SpriteBatch();
         renderer = new OrthogonalTiledMapRenderer(tileMap);
         renderer.render();
-
     }
 
     private void input() {
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            roll = diceRoll();
-            int new_location = activeplayer.getCurrent_tile_id() + roll;
-            if (new_location > 72) {
-                new_location = new_location - 73;
+        boolean player_is_active = false;
+        for (Entity player : entities) {
+            if (player.getEndX() != player.getPosX() || player.getEndY() != player.getPosY()) {
+                player_is_active = true;
+                break;
             }
-            activeplayer.setCurrent_tile_id(new_location);
-            System.out.println("Current tile id:" + activeplayer.getCurrent_tile_id());
-            if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isSpecial()) {
+        }
+        if (!player_is_active) {
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                Gdx.app.exit();
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+                roll = diceRoll();
+                int new_location = activeplayer.getCurrent_tile_id() + roll;
+                if (new_location > 71) {
+                    new_location = new_location - 72;
+                }
+                activeplayer.setCurrent_tile_id(new_location);
+                System.out.println("Current tile id:" + activeplayer.getCurrent_tile_id());
+                if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isSpecial()) {
 
-            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isGivesMoney()) {
-                activeplayer.setMoney(activeplayer.getMoney() + 3);
-            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isRemovesMoney()) {
-                if (activeplayer.getMoney() > 3) {
-                    activeplayer.setMoney(activeplayer.getMoney() - 3);
-                } else {
-                    activeplayer.setMoney(0);
+                } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isGivesMoney()) {
+                    activeplayer.setMoney(activeplayer.getMoney() + 3);
+                } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isRemovesMoney()) {
+                    if (activeplayer.getMoney() > 3) {
+                        activeplayer.setMoney(activeplayer.getMoney() - 3);
+                    } else {
+                        activeplayer.setMoney(0);
+                    }
+                } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isBuyCoffee()) {
+                    if (activeplayer.getMoney() >= 20) {
+                        activeplayer.setMoney(activeplayer.getMoney() - 20);
+                        activeplayer.setCoffee(activeplayer.getCoffee() + 1);
+                    }
+                } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id())
+                    .isRemovesCoffee()) {
+                    if (activeplayer.getCoffee() >= 1) {
+                        activeplayer.setCoffee(activeplayer.getCoffee() - 1);
+                    }
                 }
-            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isBuyCoffee()) {
-                if (activeplayer.getMoney() >= 20) {
-                    activeplayer.setMoney(activeplayer.getMoney()-20);
-                    activeplayer.setCoffee(activeplayer.getCoffee()+1);
-                }
-            } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isRemovesCoffee()) {
-                if (activeplayer.getCoffee() >= 1) {
-                    activeplayer.setCoffee(activeplayer.getCoffee() - 1);
-                }
+                System.out.println(activeplayer.getEndX());
+                System.out.println(activeplayer.getEndY());
+                activeplayer_id = (activeplayer_id + 1) % 2;
+                activeplayer = (Player) entities.get(activeplayer_id);
+                playernumber = activeplayer_id + 1;
             }
-            activeplayer_id = (activeplayer_id + 1) % 2;
-            activeplayer = (Player) entities.get(activeplayer_id);
         }
     }
 
@@ -151,7 +161,7 @@ public class Game extends ApplicationAdapter {
             entity.onTick();
         }
 
-        textRenderer.render(font, batch, camera, "aa!!", roll);
+        textRenderer.render(font, batch, camera, roll, playernumber);
         batch.end();
     }
 

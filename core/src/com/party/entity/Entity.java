@@ -42,6 +42,14 @@ public class Entity extends Actor {
     public void setEndX(int x){this.endX = x;}
     public void setEndY(int y){this.endY = y;}
 
+    public int getEndX() {
+        return this.x;
+    }
+
+    public int getEndY() {
+        return this.y;
+    }
+
     public void setPosY(int y) {
         this.y = y;
     }

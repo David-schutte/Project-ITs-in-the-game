@@ -42,19 +42,17 @@ public class Renderer {
         font40.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         font40.setUseIntegerPositions(false);
 
-
         // copy font40 to MENU font and set color (then set textbounds and establish a "button rectangle" with text centered)
         menuFont = new BitmapFont(font40.getData(), font40.getRegions(), true);
         menuFont.setColor(Color.TAN);
     }
 
-    public void render(BitmapFont bitmap, Batch batch, Camera camera, String text, int roll) {
-
+    public void render(BitmapFont bitmap, Batch batch, Camera camera, int roll, int playernumber) {
         font40.setColor(Color.YELLOW);
-        drawPlayerStatistics(batch, camera, roll);
+        drawPlayerStatistics(batch, camera, roll, playernumber);
     }
 
-    public void drawPlayerStatistics(Batch batch, Camera camera, int roll) {
+    public void drawPlayerStatistics(Batch batch, Camera camera, int roll, int playernumber) {
         Player player1 = Game.i().getPlayerManager().getPlayers().get(0);
         Player player2 = Game.i().getPlayerManager().getPlayers().get(1);
 
@@ -72,8 +70,11 @@ public class Renderer {
 
         batch.draw(coffee,10, 400);
         batch.draw(coffee,510, 400);
-
-        font40.draw(batch, "" + roll , 260, 210);
-
+        font40.draw(batch, "Speler " + playernumber, 120, 285);
+        font40.draw(batch, "mag gooien!", 120, 265);
+        //only display roll if there was a roll, not on the initial screen
+        if (roll!=0) {
+            font40.draw(batch, "" + roll, 260, 210);
+        }
     }
 }
