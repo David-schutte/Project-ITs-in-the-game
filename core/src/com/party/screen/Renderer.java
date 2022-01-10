@@ -15,6 +15,7 @@ public class Renderer {
 
     Texture wallet;
     Texture coffee;
+    Texture diceEmpty;
 
     BitmapFont font40;
     BitmapFont menuFont;
@@ -22,6 +23,7 @@ public class Renderer {
     public Renderer() {
         wallet = new Texture(Gdx.files.internal("wallet.png"));
         coffee = new Texture(Gdx.files.internal("koffie.png"));
+        diceEmpty = new Texture(Gdx.files.internal("dice_empty.png"));
         FreeTypeFontGenerator.setMaxTextureSize(4096);
 
         System.out.println(Gdx.files.internal("roboto.ttf").file().getAbsolutePath());
@@ -55,9 +57,15 @@ public class Renderer {
     private void drawAdditionalMessages(Batch batch, int playernumber, boolean turn_over, int roll) {
         font40.draw(batch, "Speler " + playernumber, 120, 285);
         font40.draw(batch, "mag gooien!", 120, 265);
+
         //only display roll if there was a roll, not on the initial screen
         if (roll!=0) {
+
+            batch.draw(diceEmpty,250, 185);
+            Color c = font40.getColor();
+            font40.setColor(new Color(200,90,30,255));
             font40.draw(batch, "" + roll, 260, 210);
+            font40.setColor(c);
         }
         if (!turn_over) {
             font40.draw(batch, "Wil je koffie kopen? j / n", 300, 200);

@@ -19,7 +19,12 @@ import com.party.entity.Entity;
 import com.party.entity.Player;
 import com.party.entity.PlayerManager;
 import com.party.minigame.Minigame;
+import com.party.minigame.impl.SpamMinigame;
 import com.party.screen.Renderer;
+import com.party.screen.menu.Menu;
+import com.party.screen.menu.impl.PauseMenu;
+import com.party.screen.menu.impl.StartMenu;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -31,7 +36,7 @@ public class Game extends ApplicationAdapter {
     OrthogonalTiledMapRenderer renderer;
     PlayerManager playerManager = new PlayerManager();
     BitmapFont font;
-
+    public Menu currentMenu = null;
     OrthographicCamera camera;
     Sprite playerSprite;
     Renderer textRenderer;
@@ -48,11 +53,14 @@ public class Game extends ApplicationAdapter {
     boolean turn_over = true;
     boolean n_is_pressed = false;
 
+    long timeStarted = System.currentTimeMillis();
+
     @Override
     public void create() {
         font = new BitmapFont();
         System.out.println(font);
         textRenderer = new Renderer();
+
 
         game = this;
 
@@ -87,12 +95,16 @@ public class Game extends ApplicationAdapter {
         batch = new SpriteBatch();
         renderer = new OrthogonalTiledMapRenderer(tileMap);
         renderer.render();
+
+        currentMenu = new StartMenu();
     }
 
     private void input() {
+        if (currentMenu != null) return;
         boolean player_is_active = false;
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE) && currentMenu == null) {
+            currentMenu = new PauseMenu();
+            return;
         }
         if (!turn_over) {
 //            System.out.println("Turn over false");
@@ -131,6 +143,13 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void render() {
+        if (currentMenu != null) {
+            batch.begin();
+            currentMenu.render(batch);
+            batch.end();
+            return;
+
+        }
 
         this.input();
         this.update();
@@ -160,13 +179,17 @@ public class Game extends ApplicationAdapter {
     }
 
     private void update() {
+        if (currentMenu != null) return;
 
         if (moving) {
+
 
             if (!isPlayerActive(activeplayer)) {
                 //last things during the turn
                 if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isSpecial()) {
                     //TODO implement the special tiles
+                    System.out.println("Special v2");
+                    startRandomMinigame();
                     turn_over = true;
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isGivesMoney()) {
                     activeplayer.setMoney(activeplayer.getMoney() + 3);
@@ -180,9 +203,8 @@ public class Game extends ApplicationAdapter {
                     turn_over = true;
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isBuyCoffee()) {
                     turn_over = activeplayer.getMoney() < 20 || n_is_pressed;
-
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id())
-                    .isRemovesCoffee()) {
+                        .isRemovesCoffee()) {
                     if (activeplayer.getCoffee() >= 1) {
                         activeplayer.setCoffee(activeplayer.getCoffee() - 1);
                     }
@@ -198,6 +220,14 @@ public class Game extends ApplicationAdapter {
                 }
             }
         }
+    }
+
+    private void startRandomMinigame() {
+        SpamMinigame b = new SpamMinigame();
+        b.addPlayer(player1);
+        b.addPlayer(player2);
+        b.start();
+        currentMinigame = b;
     }
 
     @Override
