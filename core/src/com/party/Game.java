@@ -53,24 +53,17 @@ public class Game extends ApplicationAdapter {
     boolean turn_over = true;
     boolean n_is_pressed = false;
 
-    long timeStarted = System.currentTimeMillis();
-
     @Override
     public void create() {
         font = new BitmapFont();
         System.out.println(font);
         textRenderer = new Renderer();
-
-
         game = this;
-
-
         tileMap = new TmxMapLoader().load("gameboard.tmx");
         MapLayer b = tileMap.getLayers().get(10);
         for (MapObject object : b.getObjects()) {
             System.out.println("Object: " + object.getProperties());
         }
-
         Iterator<String> it = b.getProperties().getKeys();
         while (it.hasNext()) {
             System.out.println("iterator: " + it.next());
