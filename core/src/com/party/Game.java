@@ -82,8 +82,6 @@ public class Game extends ApplicationAdapter {
         player2 = playerManager.createPlayer(game, new Texture(Gdx.files.internal("second_player.png")));
         entities.add(player1);
         entities.add(player2);
-
-        System.out.println("Player " + playernumber + " may start.");
         activeplayer = (Player) entities.get(activeplayer_id);
 
         batch = new SpriteBatch();
@@ -280,7 +278,6 @@ public class Game extends ApplicationAdapter {
         int min = 1;
         int range = max - min + 1;
         int roll = (int) (Math.random() * range) + min;
-        System.out.println(roll);
         Sound dice_sound = Gdx.audio.newSound(Gdx.files.internal("sounds/dice_roll.mp3"));
         dice_sound.play();
         return roll;

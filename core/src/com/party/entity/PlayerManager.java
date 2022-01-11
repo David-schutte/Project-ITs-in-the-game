@@ -17,8 +17,8 @@ public class PlayerManager {
 
     /**
      * This method creates a player
-     * @param game
-     * @param playertexture
+     * @param game the game
+     * @param playertexture the texture of the player
      * @return player
      */
     public Player createPlayer(Game game, Texture playertexture){
@@ -30,12 +30,6 @@ public class PlayerManager {
     public void add(Player player) {
         players.add(player);
     }
-
-    public void remove(Player player) {
-        players.remove(player);
-    }
-
-
 
     public Player getFocussedPlayer(){
         for(Player player : players){

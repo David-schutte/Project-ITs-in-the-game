@@ -12,7 +12,7 @@ public class Menu {
     public Menu(){
     }
 
-    public void render(Batch batch){
+    public void render(Batch batch) {
         batch.draw(background,0,0);
         // if(Gdx.input.getX())
     }
