@@ -39,7 +39,7 @@ public class Game extends ApplicationAdapter {
     public Menu currentMenu = null;
     OrthographicCamera camera;
     Sprite playerSprite;
-    Renderer textRenderer;
+    public Renderer textRenderer;
 
     static Game game;
     private Player player1;
@@ -143,6 +143,17 @@ public class Game extends ApplicationAdapter {
             return;
 
         }
+        if (currentMinigame != null) {
+            batch.begin();
+            currentMinigame.onKeyPress();
+            if (currentMinigame != null) {
+                currentMinigame.render(batch);
+
+            }
+            batch.end();
+            return;
+
+        }
 
         this.input();
         this.update();
@@ -158,9 +169,6 @@ public class Game extends ApplicationAdapter {
 
         batch.begin();
 
-        if (currentMinigame != null) {
-            currentMinigame.onKeyPress();
-        }
 
         for (Entity entity : entities) {
             entity.render(batch);
@@ -219,6 +227,7 @@ public class Game extends ApplicationAdapter {
         SpamMinigame b = new SpamMinigame();
         b.addPlayer(player1);
         b.addPlayer(player2);
+
         b.start();
         currentMinigame = b;
     }

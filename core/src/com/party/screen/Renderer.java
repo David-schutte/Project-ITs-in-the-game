@@ -54,6 +54,9 @@ public class Renderer {
         drawAdditionalMessages(batch, playernumber, turn_over, roll);
     }
 
+    public void drawMessage(Batch batch, String a, int x, int y) {
+        font40.draw(batch, a, x, y);
+    }
     private void drawAdditionalMessages(Batch batch, int playernumber, boolean turn_over, int roll) {
         font40.draw(batch, "Speler " + playernumber, 120, 285);
         font40.draw(batch, "mag gooien!", 120, 265);

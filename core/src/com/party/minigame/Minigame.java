@@ -1,5 +1,6 @@
 package com.party.minigame;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.party.entity.Player;
 
 import java.util.ArrayList;
@@ -56,4 +57,6 @@ public class Minigame {
         return winner;
     }
 
+    public void render(SpriteBatch batch) {
+    }
 }
