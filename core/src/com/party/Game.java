@@ -89,6 +89,13 @@ public class Game extends ApplicationAdapter {
         renderer.render();
 
         currentMenu = new StartMenu();
+
+        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/music.mp3"));
+      //  sound.loop(1, 1f, 0f);
+        long volume = sound.loop(1, 1f, 0f);
+
+        sound.setVolume(volume, 0.4f);
+
     }
 
     private void input() {
