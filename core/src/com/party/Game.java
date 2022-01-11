@@ -108,7 +108,6 @@ public class Game extends ApplicationAdapter {
             return;
         }
         if (!turn_over) {
-//            System.out.println("Turn over false");
             if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
                 activeplayer.setMoney(activeplayer.getMoney() - 20);
                 activeplayer.setCoffee(activeplayer.getCoffee() + 1);

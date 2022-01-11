@@ -2,7 +2,6 @@ package com.party.minigame.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.party.Game;
 import com.party.entity.Player;
@@ -33,15 +32,12 @@ public class SpamMinigame extends Minigame {
                 System.out.println(getWhoProvidedInput + ": has " + getWhoProvidedInput.getPoints() + " points");
             }
         }
-
     }
+
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(img,0 ,0);
         Game.i().textRenderer.drawMessage(batch, "Player 1: " + players.get(0).getPoints(), 10, 30);
         Game.i().textRenderer.drawMessage(batch, "Player 2: " + players.get(1).getPoints(), 400, 30);
-
     }
-
-
 }
