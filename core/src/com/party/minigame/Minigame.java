@@ -23,6 +23,8 @@ public class Minigame {
     }
 
     public void stop() {
+        getWinner().setMoney(getWinner().getMoney() + 10);
+
 
     }
     public void onKeyPress(){}
