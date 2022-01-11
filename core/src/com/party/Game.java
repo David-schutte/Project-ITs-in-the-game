@@ -3,6 +3,7 @@ package com.party;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -81,8 +82,6 @@ public class Game extends ApplicationAdapter {
         player2 = playerManager.createPlayer(game, new Texture(Gdx.files.internal("second_player.png")));
         entities.add(player1);
         entities.add(player2);
-
-        System.out.println("Player " + playernumber + " may start.");
         activeplayer = (Player) entities.get(activeplayer_id);
 
         batch = new SpriteBatch();
@@ -93,7 +92,9 @@ public class Game extends ApplicationAdapter {
     }
 
     private void input() {
-        if (currentMenu != null) return;
+        if (currentMenu != null) {
+            return;
+        }
         boolean player_is_active = false;
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE) && currentMenu == null) {
             currentMenu = new PauseMenu();
@@ -180,7 +181,9 @@ public class Game extends ApplicationAdapter {
     }
 
     private void update() {
-        if (currentMenu != null) return;
+        if (currentMenu != null) {
+            return;
+        }
 
         if (moving) {
 
@@ -205,7 +208,7 @@ public class Game extends ApplicationAdapter {
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isBuyCoffee()) {
                     turn_over = activeplayer.getMoney() < 20 || n_is_pressed;
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id())
-                        .isRemovesCoffee()) {
+                    .isRemovesCoffee()) {
                     if (activeplayer.getCoffee() >= 1) {
                         activeplayer.setCoffee(activeplayer.getCoffee() - 1);
                     }
@@ -284,9 +287,9 @@ public class Game extends ApplicationAdapter {
         int min = 1;
         int range = max - min + 1;
         int roll = (int) (Math.random() * range) + min;
-        System.out.println(roll);
+        Sound dice_sound = Gdx.audio.newSound(Gdx.files.internal("sounds/dice_roll.mp3"));
+        dice_sound.play();
         return roll;
-
     }
 
     public int startingPlayer() {
@@ -297,7 +300,6 @@ public class Game extends ApplicationAdapter {
         System.out.println(startingplayer);
         return startingplayer;
     }
-
 
     public TiledMap getTileMap() {
         return tileMap;
