@@ -21,16 +21,13 @@ public class StartMenu extends Menu {
 
     @Override
     public void render(Batch batch) {
-
         batch.draw(background, 0, 0);
         if(Gdx.input.isButtonPressed(0)) {
             Point cursor = new Point(Gdx.input.getX(), Gdx.input.getY());
-
             if (button.contains(cursor)) {
                 Game.i().currentMenu = null;
                 Sound b = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
                 b.play();
-
             }
         }
     }

@@ -10,12 +10,16 @@ import com.party.minigame.Minigame;
 
 public class SpamMinigame extends Minigame {
 
-    long startTime = System.currentTimeMillis();
+    long startTime = -999999;
     Texture img = new Texture(Gdx.files.internal("minigame/spammer.png"));
     public SpamMinigame() {
 
     }
 
+    @Override
+    public void start(){
+        startTime = System.currentTimeMillis();
+    }
     @Override
     public void onKeyPress() {
         if(System.currentTimeMillis() - startTime > 5000) {
@@ -39,5 +43,26 @@ public class SpamMinigame extends Minigame {
         batch.draw(img,0 ,0);
         Game.i().textRenderer.drawMessage(batch, "Player 1: " + players.get(0).getPoints(), 10, 30);
         Game.i().textRenderer.drawMessage(batch, "Player 2: " + players.get(1).getPoints(), 400, 30);
+    }
+
+    @Override
+    public String getName(){
+        return "Spammerz";
+    }
+
+    @Override
+    public String getDescription(){
+        return "Spam the buttons,as fast as you can";
+    }
+
+    @Override
+    public String getInputPlayer2(){
+        return "P";
+
+    }
+    @Override
+    public String getInputPlayer1(){
+        return "E";
+
     }
 }

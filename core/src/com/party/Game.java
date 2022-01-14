@@ -23,6 +23,7 @@ import com.party.minigame.Minigame;
 import com.party.minigame.impl.SpamMinigame;
 import com.party.screen.Renderer;
 import com.party.screen.menu.Menu;
+import com.party.screen.menu.impl.MinigamePreviewMenu;
 import com.party.screen.menu.impl.PauseMenu;
 import com.party.screen.menu.impl.StartMenu;
 
@@ -233,12 +234,12 @@ public class Game extends ApplicationAdapter {
     }
 
     private void startRandomMinigame() {
+
         SpamMinigame b = new SpamMinigame();
+        currentMenu = new MinigamePreviewMenu(b);
+
         b.addPlayer(player1);
         b.addPlayer(player2);
-
-        b.start();
-        currentMinigame = b;
     }
 
     @Override

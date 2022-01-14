@@ -1,7 +1,9 @@
 package com.party.minigame;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.party.Game;
 import com.party.entity.Player;
+import com.party.screen.menu.impl.MinigameEndMenu;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +26,7 @@ public class Minigame {
 
     public void stop() {
         getWinner().setMoney(getWinner().getMoney() + 10);
-
+        Game.i().currentMenu = new MinigameEndMenu(this);
 
     }
     public void onKeyPress(){}
@@ -56,9 +58,23 @@ public class Minigame {
                 highScore = player.getPoints();
             }
         }
+        if(winner == null) players.get(0);
         return winner;
     }
 
     public void render(SpriteBatch batch) {
+    }
+
+    public String getName(){
+        return "Example";
+    }
+    public String getDescription(){
+        return "Example Desc";
+    }
+    public String getInputPlayer1(){
+        return "E";
+    }
+    public String getInputPlayer2(){
+        return "P";
     }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.party.Game;
@@ -56,6 +57,12 @@ public class Renderer {
 
     public void drawMessage(Batch batch, String a, int x, int y) {
         font40.draw(batch, a, x, y);
+    }
+    public void drawCenteredMessage(Batch batch, String a, int x, int y){
+        GlyphLayout layout = new GlyphLayout(font40, a);
+        float textWidth = layout.width;
+        font40.draw(batch, a, x - (textWidth / 2), y);
+
     }
     private void drawAdditionalMessages(Batch batch, int playernumber, boolean turn_over, int roll) {
         font40.draw(batch, "Speler " + playernumber, 120, 285);
