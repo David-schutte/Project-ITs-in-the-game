@@ -120,6 +120,11 @@ public class TileManager {
         addTile(new Tile(63, 327).setRemovesMoney(true));
         addTile(new Tile(63, 296).setGivesMoney(true));
         //einde
+
+
+        for (Tile value : tileMap.values()) {
+            value.setSpecial(true);
+        }
     }
 
     private void addTile(Tile tile){

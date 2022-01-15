@@ -51,7 +51,7 @@ public class Minigame {
 
     public Player getWinner() {
         Player winner = null;
-        int highScore = 0;
+        int highScore = -999999;
         for (Player player : players) {
             if (player.getPoints() > highScore) {
                 winner = player;
@@ -77,4 +77,9 @@ public class Minigame {
     public String getInputPlayer2(){
         return "P";
     }
+
+    public String getInputPlayer1Desc() {
+        return "Default description!";
+    }
+
 }

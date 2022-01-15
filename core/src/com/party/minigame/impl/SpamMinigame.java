@@ -63,6 +63,9 @@ public class SpamMinigame extends Minigame {
     @Override
     public String getInputPlayer1(){
         return "E";
-
+    }
+    @Override
+    public String getInputPlayer1Desc(){
+        return "Press Button";
     }
 }

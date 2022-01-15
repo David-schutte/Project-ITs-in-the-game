@@ -20,6 +20,7 @@ import com.party.entity.Entity;
 import com.party.entity.Player;
 import com.party.entity.PlayerManager;
 import com.party.minigame.Minigame;
+import com.party.minigame.impl.DodgeMinigame;
 import com.party.minigame.impl.SpamMinigame;
 import com.party.screen.Renderer;
 import com.party.screen.menu.Menu;
@@ -235,7 +236,7 @@ public class Game extends ApplicationAdapter {
 
     private void startRandomMinigame() {
 
-        SpamMinigame b = new SpamMinigame();
+        Minigame b = new DodgeMinigame();
         currentMenu = new MinigamePreviewMenu(b);
 
         b.addPlayer(player1);

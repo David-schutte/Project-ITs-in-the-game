@@ -17,7 +17,7 @@ public class MinigamePreviewMenu extends Menu {
     private Minigame game;
     private Rectangle button = null;
 
-    public MinigamePreviewMenu(SpamMinigame b) {
+    public MinigamePreviewMenu(Minigame b) {
         game = b;
         setBackground(new Texture(Gdx.files.internal("menu/preview.png")));
         button = new Rectangle(212, 295, 210, 81);
@@ -38,8 +38,12 @@ public class MinigamePreviewMenu extends Menu {
             index++;
         }
 
-        Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer1(), 600, 320);
-        Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer2(), 600, 253);
+          Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer1(), 600, 320);
+          Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer2(), 600, 253);
+
+
+        Game.i().textRenderer.drawMessage(batch, game.getInputPlayer1Desc(), 410, 320);
+        Game.i().textRenderer.drawMessage(batch, game.getInputPlayer1Desc(), 410, 253);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 
