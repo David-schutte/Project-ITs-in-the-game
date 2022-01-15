@@ -114,7 +114,7 @@ public class DodgeMinigame extends Minigame {
 
     @Override
     public String getDescription() {
-        return "Dodge the incoming boulders!";
+        return "Dodge the incoming boulders, by jumping over them!";
     }
     @Override
     public String getInputPlayer1Desc(){
