@@ -69,9 +69,6 @@ public class DodgeMinigame extends Minigame {
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(img, 0, 0);
-        Game.i().textRenderer.drawMessage(batch, "Player 1: " + players.get(0).getPoints(), 10, 30);
-        Game.i().textRenderer.drawMessage(batch, "Player 2: " + players.get(1).getPoints(), 400, 30);
-
         for (GamePlayer gamePlayer : gamePlayers) {
             gamePlayer.move();
             batch.draw(gamePlayer.texture, gamePlayer.x, gamePlayer.y + 100);
