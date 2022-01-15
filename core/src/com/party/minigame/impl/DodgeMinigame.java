@@ -102,7 +102,7 @@ public class DodgeMinigame extends Minigame {
         int min = 5;
         int range = max - min + 1;
         int roll = (int) (Math.random() * range) + min;
-        Sound dice_sound = Gdx.audio.newSound(Gdx.files.internal("sounds/dice_roll.mp3"));
+        Sound dice_sound = Gdx.audio.newSound(Gdx.files.internal("sounds/jump.mp3"));
         dice_sound.play();
         return roll;
     }
