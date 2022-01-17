@@ -80,13 +80,13 @@ public class DodgeMinigame extends Minigame {
             for (GamePlayer gamePlayer : gamePlayers) {
                 Point point = new Point(gamePlayer.x, gamePlayer.y + 100);
                 Rectangle rectangle = new Rectangle(boulder.x - 20, boulder.y, 92, 92);
-                if(rectangle.contains(point)){
+                if (rectangle.contains(point)) {
                     gamePlayer.player.setPoints(-999);
                     Game.i().setMinigame(null);
                     stop();
                 }
             }
-            if(boulder.x < -100) {
+            if (boulder.x < -100) {
                 boulders.remove(boulder);
                 Boulder newBoulder = new Boulder();
                 newBoulder.speed = randomSpeed();
@@ -116,10 +116,11 @@ public class DodgeMinigame extends Minigame {
     public String getDescription() {
         return "Dodge the incoming boulders, by jumping over them!";
     }
+
     @Override
-    public String getInputPlayer1Desc(){
-        return "Jump";
+    public String getInputPlayer1Desc() { return "Jump";
     }
+
     @Override
     public String getInputPlayer2() {
         return "P";
@@ -144,6 +145,7 @@ public class DodgeMinigame extends Minigame {
         public GamePlayer(Player player) {
             this.player = player;
         }
+
         public Texture texture = null;
 
         public int x = 0;
@@ -153,7 +155,7 @@ public class DodgeMinigame extends Minigame {
 
 
         public void jump() {
-            if(y > 0)return;
+            if (y > 0) return;
             if (hasJumped) return;
             hasJumped = true;
         }

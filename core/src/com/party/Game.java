@@ -21,6 +21,7 @@ import com.party.entity.Player;
 import com.party.entity.PlayerManager;
 import com.party.minigame.Minigame;
 import com.party.minigame.impl.DodgeMinigame;
+import com.party.minigame.impl.ReactionMinigame;
 import com.party.minigame.impl.SpamMinigame;
 import com.party.screen.Renderer;
 import com.party.screen.menu.Menu;
@@ -30,6 +31,7 @@ import com.party.screen.menu.impl.StartMenu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
@@ -93,7 +95,7 @@ public class Game extends ApplicationAdapter {
         currentMenu = new StartMenu();
 
         Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/music.mp3"));
-      //  sound.loop(1, 1f, 0f);
+        //  sound.loop(1, 1f, 0f);
         long volume = sound.loop(1, 1f, 0f);
 
         sound.setVolume(volume, 0.4f);
@@ -216,7 +218,7 @@ public class Game extends ApplicationAdapter {
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isBuyCoffee()) {
                     turn_over = activeplayer.getMoney() < 20 || n_is_pressed;
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id())
-                    .isRemovesCoffee()) {
+                        .isRemovesCoffee()) {
                     if (activeplayer.getCoffee() >= 1) {
                         activeplayer.setCoffee(activeplayer.getCoffee() - 1);
                     }
@@ -235,18 +237,18 @@ public class Game extends ApplicationAdapter {
     }
 
     private void startRandomMinigame() {
+        Minigame[] minigames = new Minigame[]{new DodgeMinigame(), new SpamMinigame(), new ReactionMinigame()};
 
-        Minigame b = new DodgeMinigame();
-        currentMenu = new MinigamePreviewMenu(b);
-
-        b.addPlayer(player1);
-        b.addPlayer(player2);
+        int rnd = new Random().nextInt(minigames.length);
+        Minigame randomGame = minigames[rnd];
+        currentMenu = new MinigamePreviewMenu(randomGame);
+        randomGame.addPlayer(player1);
+        randomGame.addPlayer(player2);
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-
     }
 
     @Override
