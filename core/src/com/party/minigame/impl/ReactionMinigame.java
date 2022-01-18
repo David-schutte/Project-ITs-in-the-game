@@ -33,17 +33,15 @@ public class ReactionMinigame extends Minigame {
                 if(players.size() < value.getInputSender().getId()) continue;
                 Player getWhoProvidedInput = players.get(value.getInputSender().getId());
                 if (getWhoProvidedInput == null) return;
-                if(hasStarted){
+                if (hasStarted){
                     getWhoProvidedInput.setPoints(999);
-                    Game.i().setMinigame(null);
-                    stop();
                 }
                 else{
                     getWhoProvidedInput.setPoints(-999);
 
-                    Game.i().setMinigame(null);
-                    stop();
                 }
+                Game.i().setMinigame(null);
+                stop();
             }
         }
     }
