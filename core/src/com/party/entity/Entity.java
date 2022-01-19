@@ -3,11 +3,7 @@ package com.party.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public abstract class Entity extends Actor {
     protected int x;
     protected int y;

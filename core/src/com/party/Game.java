@@ -95,8 +95,8 @@ public class Game extends ApplicationAdapter {
         renderer.render();
 
         currentMenu = new StartMenu();
-      //  player1.setMoney(12);
-      //  player1.setCoffee(7);
+        player1.setMoney(12);
+        player1.setCoffee(7);
 
         Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/music.mp3"));
         //  sound.loop(1, 1f, 0f);
@@ -304,7 +304,7 @@ public class Game extends ApplicationAdapter {
      * @return the number rolled
      */
     public int diceRoll() {
-        int max = 6;
+        int max = 8;
         int min = 1;
         int range = max - min + 1;
         int roll = (int) (Math.random() * range) + min;
