@@ -6,7 +6,6 @@ import com.party.entity.Player;
 import com.party.screen.menu.impl.MinigameEndMenu;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Minigame {
     public ArrayList<Player> players = new ArrayList<>();
@@ -25,21 +24,13 @@ public class Minigame {
     }
 
     public void stop() {
-        getWinner().setMoney(getWinner().getMoney() + 10);
+        getWinner().setMoney(getWinner().getMoney() + 20);
         Game.i().currentMenu = new MinigameEndMenu(this);
 
     }
     public void onKeyPress(){}
     public void setScore(int score) {
 
-    }
-
-    public void removePlayer(Player player) {
-        this.players.remove(player);
-    }
-
-    public void removeAllPlayers() {
-        this.players.clear();
     }
 
     public void setPlayers(ArrayList<Player> players) {
@@ -58,7 +49,9 @@ public class Minigame {
                 highScore = player.getPoints();
             }
         }
-        if(winner == null) players.get(0);
+        if(winner == null) {
+            players.get(0);
+        }
         return winner;
     }
 

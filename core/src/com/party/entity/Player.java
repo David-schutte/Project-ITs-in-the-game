@@ -26,8 +26,6 @@ public class Player extends Entity {
 
     private int current_tile_id = 0;
 
-    private float speed = 2f;
-
     public Player(Game game, Texture playerTexture) {
         super();
         setTexture(playerTexture);
@@ -49,6 +47,7 @@ public class Player extends Entity {
     private Action runningAction;
 
     public void moveTo(Vector2 location) {
+        float speed = 2f;
         runningAction = Actions.moveTo(location.x, location.y, speed);
         this.addAction(runningAction);
     }

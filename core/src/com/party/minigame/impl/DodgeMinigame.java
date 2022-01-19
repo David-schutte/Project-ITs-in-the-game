@@ -9,14 +9,15 @@ import com.party.entity.Player;
 import com.party.input.InputKeys;
 import com.party.minigame.Minigame;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.HashSet;
 
 public class DodgeMinigame extends Minigame {
 
     long startTime = -999999;
-    private final HashSet<Boulder> boulders = new HashSet<Boulder>();
-    private final HashSet<GamePlayer> gamePlayers = new HashSet<GamePlayer>();
+    private final HashSet<Boulder> boulders = new HashSet<>();
+    private final HashSet<GamePlayer> gamePlayers = new HashSet<>();
     Texture boulderTexture = new Texture("minigame/boulder.png");
     Texture img = new Texture(Gdx.files.internal("minigame/dodge.png"));
 
@@ -52,6 +53,7 @@ public class DodgeMinigame extends Minigame {
                 Player getWhoProvidedInput = players.get(value.getInputSender().getId());
                 if (getWhoProvidedInput == null) return;
                 GamePlayer gp = fromPlayer(getWhoProvidedInput);
+                assert gp != null;
                 gp.jump();
 
 
@@ -133,13 +135,13 @@ public class DodgeMinigame extends Minigame {
 
     }
 
-    class Boulder {
+    static class Boulder {
         public int x = 640;
         public int speed = 3;
         public int y = 40;
     }
 
-    class GamePlayer {
+    static class GamePlayer {
         public Player player;
 
         public GamePlayer(Player player) {
