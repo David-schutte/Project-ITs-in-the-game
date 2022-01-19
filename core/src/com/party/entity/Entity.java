@@ -56,6 +56,9 @@ public abstract class Entity extends Actor {
     public void setTexture(Texture texture) {
         this.texture = texture;
     }
+    public Texture getTexture() {
+        return texture;
+    }
 
     public void move() {
         if (x > endX) x -= speed;

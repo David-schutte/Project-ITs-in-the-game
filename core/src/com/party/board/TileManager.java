@@ -122,9 +122,9 @@ public class TileManager {
         //einde
 
 
-      //  for (Tile value : tileMap.values()) {
-      //      value.setSpecial(true);
-      //  }
+       // for (Tile value : tileMap.values()) {
+       //     value.setBuyCoffee(true);
+       // }
     }
 
     private void addTile(Tile tile){

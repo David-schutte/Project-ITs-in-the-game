@@ -26,6 +26,7 @@ import com.party.minigame.impl.ReactionMinigame;
 import com.party.minigame.impl.SpamMinigame;
 import com.party.screen.Renderer;
 import com.party.screen.menu.Menu;
+import com.party.screen.menu.impl.EndMenu;
 import com.party.screen.menu.impl.MinigamePreviewMenu;
 import com.party.screen.menu.impl.PauseMenu;
 import com.party.screen.menu.impl.StartMenu;
@@ -94,6 +95,8 @@ public class Game extends ApplicationAdapter {
         renderer.render();
 
         currentMenu = new StartMenu();
+      //  player1.setMoney(12);
+      //  player1.setCoffee(7);
 
         Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/music.mp3"));
         //  sound.loop(1, 1f, 0f);
@@ -113,9 +116,13 @@ public class Game extends ApplicationAdapter {
             return;
         }
         if (!turn_over) {
+
             if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
                 activeplayer.setMoney(activeplayer.getMoney() - 20);
                 activeplayer.setCoffee(activeplayer.getCoffee() + 1);
+                if(activeplayer.getCoffee() == 8){
+                    currentMenu = new EndMenu();
+                }
                 turn_over = true;
             } else if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
                 turn_over = true;
@@ -196,11 +203,13 @@ public class Game extends ApplicationAdapter {
             return;
         }
 
+
         if (moving) {
 
 
             if (!isPlayerActive(activeplayer)) {
                 //last things during the turn
+
                 if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isSpecial()) {
                     //TODO implement the special tiles
                     System.out.println("Special v2");
@@ -316,4 +325,23 @@ public class Game extends ApplicationAdapter {
     public TiledMap getTileMap() {
         return tileMap;
     }
+
+    public void restart(){
+        dispose();
+        new Game().create();
+    }
+
+   //get the winning player by coffee
+    public Player getWinner(){
+        Player winner = null;
+        if(player1.getCoffee() > player2.getCoffee()){
+            winner = player1;
+        }
+        else if(player2.getCoffee() > player1.getCoffee()){
+            winner = player2;
+        }
+        return winner;
+    }
+
+
 }

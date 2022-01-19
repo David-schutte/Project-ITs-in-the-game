@@ -25,6 +25,7 @@ public class MinigameEndMenu extends Menu {
     }
 
 
+
     @Override
     public void render(Batch batch) {
         batch.draw(background, 0, 0);

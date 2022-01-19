@@ -38,7 +38,7 @@ public class PauseMenu extends Menu {
                 Sound b = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
                 b.play();
             } else if (restartButton.contains(cursor)) {
-                Gdx.app.exit();
+               Game.i().restart();
             } else if (optionsButton.contains(cursor)) {
                 Gdx.app.exit();
             } else if (exitButton.contains(cursor)) {
