@@ -21,7 +21,7 @@ public class PauseMenu extends Menu {
         sound.play();
         setBackground(new Texture(Gdx.files.internal("menu/pausemenu.png")));
         resumeButton = new Rectangle(85, 157, 277, 52);
-        exitButton = new Rectangle(126, 367, 392, 56);
+        exitButton = new Rectangle(126, 367, 392, 56*2);
         restartButton = new Rectangle(177, 229, 292, 51);
         optionsButton = new Rectangle(185, 300, 271, 48);
     }

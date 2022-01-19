@@ -241,8 +241,8 @@ public class Game extends ApplicationAdapter {
         Minigame[] minigames = new Minigame[]{new DodgeMinigame(), new SpamMinigame(), new ReactionMinigame(), new DobbelMinigame()};
 
         int rnd = new Random().nextInt(minigames.length);
-        //Minigame randomGame = minigames[rnd];
-        Minigame randomGame = new DobbelMinigame();
+        Minigame randomGame = minigames[rnd];
+        //Minigame randomGame = new DobbelMinigame();
         currentMenu = new MinigamePreviewMenu(randomGame);
         randomGame.addPlayer(player1);
         randomGame.addPlayer(player2);

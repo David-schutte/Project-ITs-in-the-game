@@ -112,12 +112,12 @@ public class DobbelMinigame extends Minigame {
 
     @Override
     public String getName() {
-        return "Reaction Game";
+        return "Gamble Game";
     }
 
     @Override
     public String getDescription() {
-        return "Press your button when,you see the image";
+        return "Press the button to gamble,get the highest score to win!";
     }
 
     @Override
