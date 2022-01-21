@@ -27,7 +27,6 @@ public class Renderer {
         diceEmpty = new Texture(Gdx.files.internal("dice_empty.png"));
         FreeTypeFontGenerator.setMaxTextureSize(4096);
 
-        System.out.println(Gdx.files.internal("roboto.ttf").file().getAbsolutePath());
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("roboto.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.packer = new PixmapPacker(1024, 1024, Pixmap.Format.RGBA8888, 1, false);
@@ -58,22 +57,24 @@ public class Renderer {
     public void drawMessage(Batch batch, String a, int x, int y) {
         font40.draw(batch, a, x, y);
     }
-    public void drawCenteredMessage(Batch batch, String a, int x, int y){
+
+    public void drawCenteredMessage(Batch batch, String a, int x, int y) {
         GlyphLayout layout = new GlyphLayout(font40, a);
         float textWidth = layout.width;
         font40.draw(batch, a, x - (textWidth / 2), y);
 
     }
+
     private void drawAdditionalMessages(Batch batch, int playernumber, boolean turn_over, int roll) {
         font40.draw(batch, "Speler " + playernumber, 120, 285);
         font40.draw(batch, "mag gooien!", 120, 265);
 
         //only display roll if there was a roll, not on the initial screen
-        if (roll!=0) {
+        if (roll != 0) {
 
-            batch.draw(diceEmpty,250, 185);
+            batch.draw(diceEmpty, 250, 185);
             Color c = font40.getColor();
-            font40.setColor(new Color(200,90,30,255));
+            font40.setColor(new Color(200, 90, 30, 255));
             font40.draw(batch, "" + roll, 260, 210);
             font40.setColor(c);
         }
@@ -96,11 +97,11 @@ public class Renderer {
         font40.draw(batch, "Koffie: " + player1.getCoffee(), 40, 420);
         font40.draw(batch, "Koffie: " + player2.getCoffee(), 540, 420);
 
-        batch.draw(wallet,10, 425);
-        batch.draw(wallet,510, 425);
+        batch.draw(wallet, 10, 425);
+        batch.draw(wallet, 510, 425);
 
-        batch.draw(coffee,10, 400);
-        batch.draw(coffee,510, 400);
+        batch.draw(coffee, 10, 400);
+        batch.draw(coffee, 510, 400);
 
     }
 }

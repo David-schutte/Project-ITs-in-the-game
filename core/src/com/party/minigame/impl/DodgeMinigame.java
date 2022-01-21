@@ -43,7 +43,6 @@ public class DodgeMinigame extends Minigame {
     @Override
     public void onKeyPress() {
         if (System.currentTimeMillis() - startTime > 999999999) {
-            System.out.println("Winner: " + getWinner().getName() + " Points: " + getWinner().getPoints());
             Game.i().setMinigame(null);
             stop();
         }
@@ -120,7 +119,8 @@ public class DodgeMinigame extends Minigame {
     }
 
     @Override
-    public String getInputPlayer1Desc() { return "Jump";
+    public String getInputPlayer1Desc() {
+        return "Jump";
     }
 
     @Override

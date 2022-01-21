@@ -32,7 +32,6 @@ import com.party.screen.menu.impl.PauseMenu;
 import com.party.screen.menu.impl.StartMenu;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class Game extends ApplicationAdapter {
@@ -63,17 +62,12 @@ public class Game extends ApplicationAdapter {
     @Override
     public void create() {
         font = new BitmapFont();
-        System.out.println(font);
         textRenderer = new Renderer();
         game = this;
         tileMap = new TmxMapLoader().load("gameboard.tmx");
         MapLayer b = tileMap.getLayers().get(10);
         for (MapObject object : b.getObjects()) {
             System.out.println("Object: " + object.getProperties());
-        }
-        Iterator<String> it = b.getProperties().getKeys();
-        while (it.hasNext()) {
-            System.out.println("iterator: " + it.next());
         }
 
         float w = 1600;
@@ -95,11 +89,8 @@ public class Game extends ApplicationAdapter {
         renderer.render();
 
         currentMenu = new StartMenu();
-        player1.setMoney(12);
-        player1.setCoffee(7);
 
         Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/music.mp3"));
-        //  sound.loop(1, 1f, 0f);
         long volume = sound.loop(1, 1f, 0f);
 
         sound.setVolume(volume, 0.4f);
@@ -120,7 +111,7 @@ public class Game extends ApplicationAdapter {
             if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
                 activeplayer.setMoney(activeplayer.getMoney() - 20);
                 activeplayer.setCoffee(activeplayer.getCoffee() + 1);
-                if(activeplayer.getCoffee() == 8){
+                if (activeplayer.getCoffee() == 8) {
                     currentMenu = new EndMenu();
                 }
                 turn_over = true;
@@ -211,8 +202,6 @@ public class Game extends ApplicationAdapter {
                 //last things during the turn
 
                 if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isSpecial()) {
-                    //TODO implement the special tiles
-                    System.out.println("Special v2");
                     startRandomMinigame();
                     turn_over = true;
                 } else if (game.getTileManager().getTileMap().get(activeplayer.getCurrent_tile_id()).isGivesMoney()) {
@@ -251,7 +240,6 @@ public class Game extends ApplicationAdapter {
 
         int rnd = new Random().nextInt(minigames.length);
         Minigame randomGame = minigames[rnd];
-        //Minigame randomGame = new DobbelMinigame();
         currentMenu = new MinigamePreviewMenu(randomGame);
         randomGame.addPlayer(player1);
         randomGame.addPlayer(player2);
@@ -282,10 +270,6 @@ public class Game extends ApplicationAdapter {
         return playerSprite;
     }
 
-    public Minigame getCurrentMinigame() {
-        return currentMinigame;
-    }
-
     public void setMinigame(Minigame minigame) {
         this.currentMinigame = minigame;
     }
@@ -304,7 +288,7 @@ public class Game extends ApplicationAdapter {
      * @return the number rolled
      */
     public int diceRoll() {
-        int max = 8;
+        int max = 6;
         int min = 1;
         int range = max - min + 1;
         int roll = (int) (Math.random() * range) + min;
@@ -322,26 +306,18 @@ public class Game extends ApplicationAdapter {
         return startingplayer;
     }
 
-    public TiledMap getTileMap() {
-        return tileMap;
-    }
-
-    public void restart(){
+    public void restart() {
         dispose();
         new Game().create();
     }
 
-   //get the winning player by coffee
-    public Player getWinner(){
+    public Player getWinner() {
         Player winner = null;
-        if(player1.getCoffee() > player2.getCoffee()){
+        if (player1.getCoffee() > player2.getCoffee()) {
             winner = player1;
-        }
-        else if(player2.getCoffee() > player1.getCoffee()){
+        } else if (player2.getCoffee() > player1.getCoffee()) {
             winner = player2;
         }
         return winner;
     }
-
-
 }

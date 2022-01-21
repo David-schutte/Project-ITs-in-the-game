@@ -1,8 +1,8 @@
 package com.party.board;
 
 public class Tile {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     boolean special = false;
     boolean givesMoney = false;
     boolean removesMoney = false;
@@ -52,15 +52,17 @@ public class Tile {
         return this;
     }
 
-    public Tile setSpecial(boolean special){
+    public Tile setSpecial(boolean special) {
         this.special = special;
         return this;
     }
-    public Tile setGivesMoney(boolean givemoney){
+
+    public Tile setGivesMoney(boolean givemoney) {
         this.givesMoney = givemoney;
         return this;
     }
-    public Tile setRemovesMoney(boolean removemoney){
+
+    public Tile setRemovesMoney(boolean removemoney) {
         this.removesMoney = removemoney;
         return this;
     }

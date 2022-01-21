@@ -2,6 +2,7 @@ package com.party.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.party.Game;
+
 import java.util.ArrayList;
 
 public class PlayerManager {
@@ -17,11 +18,12 @@ public class PlayerManager {
 
     /**
      * This method creates a player
-     * @param game the game
+     *
+     * @param game          the game
      * @param playertexture the texture of the player
      * @return player
      */
-    public Player createPlayer(Game game, Texture playertexture){
+    public Player createPlayer(Game game, Texture playertexture) {
         Player player = new Player(game, playertexture);
         add(player);
         return player;
@@ -29,15 +31,6 @@ public class PlayerManager {
 
     public void add(Player player) {
         players.add(player);
-    }
-
-    public Player getFocussedPlayer(){
-        for(Player player : players){
-            if(player.isFocussed()){
-                return player;
-            }
-        }
-        return null;
     }
 
 }

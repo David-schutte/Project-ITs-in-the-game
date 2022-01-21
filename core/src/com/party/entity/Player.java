@@ -2,14 +2,10 @@ package com.party.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.party.Game;
 
 public class Player extends Entity {
 
-    private boolean focussed;
     private int points;
     private int money;
     private int coffee;
@@ -39,38 +35,13 @@ public class Player extends Entity {
         // setEndX/y is the 'goal' position. The location we want to get to.
         setEndX(getPosX());
         setEndY(getPosY());
-        focussed = false;
         money = 0;
         coffee = 0;
-    }
-
-    private Action runningAction;
-
-    public void moveTo(Vector2 location) {
-        float speed = 2f;
-        runningAction = Actions.moveTo(location.x, location.y, speed);
-        this.addAction(runningAction);
-    }
-
-    public void stopAction() {
-        this.removeAction(runningAction);
-    }
-
-    public void stopAllActions() {
-        this.clearActions();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(Game.i().getPlayerSprite(), getPosX(), getPosY());
-    }
-
-    public boolean isFocussed() {
-        return focussed;
-    }
-
-    public void setFocussed(boolean focussed) {
-        this.focussed = focussed;
     }
 
     public int getPoints() {

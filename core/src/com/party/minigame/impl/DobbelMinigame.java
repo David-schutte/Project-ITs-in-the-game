@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class DobbelMinigame extends Minigame {
 
     long startTime = -999999;
-    private boolean hasStarted = false;
     Texture img = new Texture(Gdx.files.internal("minigame/dobbel.png"));
     Texture dice = new Texture(Gdx.files.internal("minigame/dice_empty.png"));
     private final ArrayList<GamePlayer> gamePlayers = new ArrayList<>();
@@ -45,7 +44,6 @@ public class DobbelMinigame extends Minigame {
     @Override
     public void onKeyPress() {
         if (System.currentTimeMillis() - startTime > 20000) {
-            System.out.println("Winner: " + getWinner().getName() + " Points: " + getWinner().getPoints());
             Game.i().setMinigame(null);
             stop();
         }
@@ -55,6 +53,7 @@ public class DobbelMinigame extends Minigame {
                 Player getWhoProvidedInput = players.get(value.getInputSender().getId());
                 if (getWhoProvidedInput == null) return;
                 GamePlayer gamePlayer = fromPlayer(getWhoProvidedInput);
+                assert gamePlayer != null;
                 if (gamePlayer.diceOne == 0) {
                     gamePlayer.diceOne = diceRoll();
                     return;
@@ -94,7 +93,6 @@ public class DobbelMinigame extends Minigame {
         if (gamePlayer1.diceTwo != 0 && gamePlayer2.diceOne != 0) {
             if (finishTimer < 0) finishTimer = System.currentTimeMillis();
         }
-        // System.out.println(finishTimer);
         if (finishTimer > 0 && System.currentTimeMillis() - finishTimer > 3000) {
             int scoreOne = gamePlayer1.diceOne + gamePlayer1.diceTwo;
             int scoreTwo = gamePlayer2.diceOne + gamePlayer2.diceTwo;
@@ -143,7 +141,7 @@ public class DobbelMinigame extends Minigame {
         return null;
     }
 
-    class GamePlayer {
+    static class GamePlayer {
         public Player player;
         public int diceOne;
         public int diceTwo;

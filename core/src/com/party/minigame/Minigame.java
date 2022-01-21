@@ -11,8 +11,6 @@ public class Minigame {
     public ArrayList<Player> players = new ArrayList<>();
 
     public Minigame() {
-
-        //TODO: Implement this method
     }
 
     public void addPlayer(Player player) {
@@ -28,16 +26,9 @@ public class Minigame {
         Game.i().currentMenu = new MinigameEndMenu(this);
 
     }
-    public void onKeyPress(){}
-    public void setScore(int score) {
 
-    }
+    public void onKeyPress() {
 
-    public void setPlayers(ArrayList<Player> players) {
-        for (Player player : players) {
-            player.setPoints(0);
-        }
-        this.players = players;
     }
 
     public Player getWinner() {
@@ -49,7 +40,7 @@ public class Minigame {
                 highScore = player.getPoints();
             }
         }
-        if(winner == null) {
+        if (winner == null) {
             players.get(0);
         }
         return winner;
@@ -58,16 +49,19 @@ public class Minigame {
     public void render(SpriteBatch batch) {
     }
 
-    public String getName(){
+    public String getName() {
         return "Example";
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return "Example Desc";
     }
-    public String getInputPlayer1(){
+
+    public String getInputPlayer1() {
         return "E";
     }
-    public String getInputPlayer2(){
+
+    public String getInputPlayer2() {
         return "P";
     }
 

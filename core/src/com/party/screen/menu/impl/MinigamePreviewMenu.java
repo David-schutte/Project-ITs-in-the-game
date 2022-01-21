@@ -7,21 +7,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.party.Game;
 import com.party.minigame.Minigame;
-import com.party.minigame.impl.SpamMinigame;
 import com.party.screen.menu.Menu;
 
-import java.awt.*;
 
 public class MinigamePreviewMenu extends Menu {
 
-    private Minigame game;
-    private Rectangle button = null;
+    private final Minigame game;
 
     public MinigamePreviewMenu(Minigame b) {
         game = b;
         setBackground(new Texture(Gdx.files.internal("menu/preview.png")));
-        button = new Rectangle(212, 295, 210, 81);
-
     }
 
 
@@ -38,8 +33,8 @@ public class MinigamePreviewMenu extends Menu {
             index++;
         }
 
-          Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer1(), 600, 320);
-          Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer2(), 600, 253);
+        Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer1(), 600, 320);
+        Game.i().textRenderer.drawCenteredMessage(batch, game.getInputPlayer2(), 600, 253);
 
 
         Game.i().textRenderer.drawMessage(batch, game.getInputPlayer1Desc(), 410, 320);

@@ -10,7 +10,6 @@ public abstract class Entity extends Actor {
 
     private int endX;
     private int endY;
-    private double speed = 1;
     private Texture texture;
 
 
@@ -30,13 +29,14 @@ public abstract class Entity extends Actor {
         return this.y;
     }
 
-    public void setEndX(int x){
+    public void setEndX(int x) {
         this.endX = x;
     }
 
-    public void setEndY(int y){
+    public void setEndY(int y) {
         this.endY = y;
     }
+
     abstract public int getEndX();
 
     abstract public int getEndY();
@@ -52,11 +52,13 @@ public abstract class Entity extends Actor {
     public void setTexture(Texture texture) {
         this.texture = texture;
     }
+
     public Texture getTexture() {
         return texture;
     }
 
     public void move() {
+        double speed = 1;
         if (x > endX) x -= speed;
         if (x < endX) x += speed;
         if (y > endY) y -= speed;

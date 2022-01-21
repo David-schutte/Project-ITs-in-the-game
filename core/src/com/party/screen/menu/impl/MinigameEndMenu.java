@@ -7,33 +7,26 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.party.Game;
 import com.party.minigame.Minigame;
-import com.party.minigame.impl.SpamMinigame;
 import com.party.screen.menu.Menu;
-
-import java.awt.*;
 
 public class MinigameEndMenu extends Menu {
 
     private Minigame game;
-    private Rectangle button = null;
 
     public MinigameEndMenu(Minigame b) {
         game = b;
         setBackground(new Texture(Gdx.files.internal("menu/end.png")));
-        button = new Rectangle(212, 295, 210, 81);
-
     }
-
 
 
     @Override
     public void render(Batch batch) {
         batch.draw(background, 0, 0);
 
-        if(game.getWinner() == game.players.get(0)){
+        if (game.getWinner() == game.players.get(0)) {
             batch.draw(new Texture(Gdx.files.internal("first_player_hd.png")), 240, 365);
             batch.draw(new Texture(Gdx.files.internal("second_player_hd.png")), 240, 201);
-        }else{
+        } else {
             batch.draw(new Texture(Gdx.files.internal("second_player_hd.png")), 240, 365);
             batch.draw(new Texture(Gdx.files.internal("first_player_hd.png")), 240, 201);
 

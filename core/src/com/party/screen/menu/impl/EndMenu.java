@@ -2,31 +2,19 @@ package com.party.screen.menu.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import com.party.Game;
 import com.party.screen.menu.Menu;
 
-import java.awt.*;
-
 public class EndMenu extends Menu {
 
-    private Rectangle button = null;
-    Animation<TextureRegion> regionAnimation = null;
 
-
-    private Texture playerTexture = null;
+    private final Texture playerTexture;
     public EndMenu() {
         setBackground(new Texture(Gdx.files.internal("menu/gameEnd.png")));
         playerTexture = new Texture(Gdx.files.internal("minigame/player_" + winnerId() + "_clear.png"));
-        button = new Rectangle(212,295,210,81);
-
-
-
     }
 
     public int winnerId() {
